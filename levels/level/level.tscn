@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://l717eum1eevl"]
+[gd_scene load_steps=5 format=3 uid="uid://l717eum1eevl"]
 
 [ext_resource type="PackedScene" uid="uid://bai6sd6bsnbj6" path="res://character_controller/character_controller.tscn" id="1_ui5l1"]
 [ext_resource type="PackedScene" uid="uid://c4ixfrcmd12uh" path="res://enemies/basic_zombie/basic_zombie.tscn" id="2_ydwl3"]
+[ext_resource type="PackedScene" uid="uid://dw4svx0h3wp3m" path="res://construction/wall.tscn" id="3_hynhr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cjke7"]
 vertices = PackedVector2Array(267, 375, 267, 641, -16, 641, -13, 379, 41, 377, 204, 375, 42, 347, 205, 345, -1152, 642, -1159, -650, 1156, -644, -45, 352, 1149, 651, 297, 641, 298, 344, -48, 644, -13, 350, 257, 344)
@@ -17,10 +18,32 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-1159, -650, 1156, -644
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 
+[node name="basic_zombie" parent="." instance=ExtResource("2_ydwl3")]
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Node2D"]
 position = Vector2(-3, 3)
 navigation_polygon = SubResource("NavigationPolygon_cjke7")
 
-[node name="basic_zombie" parent="Node2D" instance=ExtResource("2_ydwl3")]
+[node name="wall2" parent="Node2D" instance=ExtResource("3_hynhr")]
+position = Vector2(278, 448)
+
+[node name="wall" parent="Node2D" instance=ExtResource("3_hynhr")]
+position = Vector2(278, 549)
+
+[node name="wall3" parent="Node2D" instance=ExtResource("3_hynhr")]
+position = Vector2(-32, 449)
+
+[node name="wall4" parent="Node2D" instance=ExtResource("3_hynhr")]
+position = Vector2(-32, 550)
+
+[node name="wall5" parent="Node2D" instance=ExtResource("3_hynhr")]
+position = Vector2(4, 366)
+rotation = 1.56401
+scale = Vector2(1, 0.360067)
+
+[node name="wall6" parent="Node2D" instance=ExtResource("3_hynhr")]
+position = Vector2(238, 362)
+rotation = 1.56401
+scale = Vector2(1, 0.360067)

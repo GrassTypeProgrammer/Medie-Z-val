@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw4svx0h3wp3m"]
+
+[ext_resource type="Texture2D" uid="uid://cijj50qkvepmq" path="res://art/construction/wall.png" id="1_uq7k1"]
+
+[node name="wall" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4.875, 12.625)
+texture = ExtResource("1_uq7k1")

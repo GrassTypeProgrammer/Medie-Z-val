@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://l717eum1eevl"]
+[gd_scene load_steps=4 format=3 uid="uid://l717eum1eevl"]
 
 [ext_resource type="PackedScene" uid="uid://bai6sd6bsnbj6" path="res://character_controller/character_controller.tscn" id="1_ui5l1"]
+[ext_resource type="PackedScene" uid="uid://c4ixfrcmd12uh" path="res://enemies/basic_zombie/basic_zombie.tscn" id="2_ydwl3"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_cjke7"]
+vertices = PackedVector2Array(267, 375, 267, 641, -16, 641, -13, 379, 41, 377, 204, 375, 42, 347, 205, 345, -1152, 642, -1159, -650, 1156, -644, -45, 352, 1149, 651, 297, 641, 298, 344, -48, 644, -13, 350, 257, 344)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(10, 12, 13, 14), PackedInt32Array(11, 15, 8), PackedInt32Array(16, 11, 10), PackedInt32Array(6, 16, 10), PackedInt32Array(7, 6, 10, 17), PackedInt32Array(17, 10, 14)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1159, -650, 1156, -644, 1149, 651, 297, 641, 298, 344, 257, 344, 205, 345, 204, 375, 267, 375, 267, 641, -16, 641, -13, 379, 41, 377, 42, 347, -13, 350, -45, 352, -48, 644, -1152, 642)])
 
 [node name="level" type="Node2D"]
 
@@ -10,3 +16,11 @@
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Node2D"]
+position = Vector2(-3, 3)
+navigation_polygon = SubResource("NavigationPolygon_cjke7")
+
+[node name="basic_zombie" parent="Node2D" instance=ExtResource("2_ydwl3")]

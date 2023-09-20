@@ -1,49 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://l717eum1eevl"]
+[gd_scene load_steps=4 format=3 uid="uid://bxyyqep0153we"]
 
 [ext_resource type="PackedScene" uid="uid://bai6sd6bsnbj6" path="res://character_controller/character_controller.tscn" id="1_ui5l1"]
-[ext_resource type="PackedScene" uid="uid://c4ixfrcmd12uh" path="res://enemies/basic_zombie/basic_zombie.tscn" id="2_ydwl3"]
-[ext_resource type="PackedScene" uid="uid://dw4svx0h3wp3m" path="res://construction/wall.tscn" id="3_hynhr"]
+[ext_resource type="PackedScene" uid="uid://bfj5jq8u671o4" path="res://enemy_manager/enemy_manager.tscn" id="4_xga3o"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_cjke7"]
-vertices = PackedVector2Array(267, 375, 267, 641, -16, 641, -13, 379, 41, 377, 204, 375, 42, 347, 205, 345, -1152, 642, -1159, -650, 1156, -644, -45, 352, 1149, 651, 297, 641, 298, 344, -48, 644, -13, 350, 257, 344)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(10, 12, 13, 14), PackedInt32Array(11, 15, 8), PackedInt32Array(16, 11, 10), PackedInt32Array(6, 16, 10), PackedInt32Array(7, 6, 10, 17), PackedInt32Array(17, 10, 14)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1159, -650, 1156, -644, 1149, 651, 297, 641, 298, 344, 257, 344, 205, 345, 204, 375, 267, 375, 267, 641, -16, 641, -13, 379, 41, 377, 42, 347, -13, 350, -45, 352, -48, 644, -1152, 642)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_df0y5"]
+vertices = PackedVector2Array(1, 1, 373, 2, 376, 160, 2, 156)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1, 1, 373, 2, 376, 160, 2, 156)])
 
-[node name="level" type="Node2D"]
+[node name="Level" type="Node2D"]
 
 [node name="character_controller" parent="." instance=ExtResource("1_ui5l1")]
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="enemy_manager" parent="." instance=ExtResource("4_xga3o")]
+
+[node name="navigation" type="Node2D" parent="."]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="navigation"]
+navigation_polygon = SubResource("NavigationPolygon_df0y5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
-
-[node name="basic_zombie" parent="." instance=ExtResource("2_ydwl3")]
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Node2D"]
-position = Vector2(-3, 3)
-navigation_polygon = SubResource("NavigationPolygon_cjke7")
-
-[node name="wall2" parent="Node2D" instance=ExtResource("3_hynhr")]
-position = Vector2(278, 448)
-
-[node name="wall" parent="Node2D" instance=ExtResource("3_hynhr")]
-position = Vector2(278, 549)
-
-[node name="wall3" parent="Node2D" instance=ExtResource("3_hynhr")]
-position = Vector2(-32, 449)
-
-[node name="wall4" parent="Node2D" instance=ExtResource("3_hynhr")]
-position = Vector2(-32, 550)
-
-[node name="wall5" parent="Node2D" instance=ExtResource("3_hynhr")]
-position = Vector2(4, 366)
-rotation = 1.56401
-scale = Vector2(1, 0.360067)
-
-[node name="wall6" parent="Node2D" instance=ExtResource("3_hynhr")]
-position = Vector2(238, 362)
-rotation = 1.56401
-scale = Vector2(1, 0.360067)
+zoom = Vector2(0.6, 0.6)

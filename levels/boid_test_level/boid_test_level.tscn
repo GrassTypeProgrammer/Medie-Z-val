@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf2m3irnpoiys"]
+
+[ext_resource type="PackedScene" uid="uid://dohfarltvx8c" path="res://enemies/boid/boid.tscn" id="1_hv70h"]
+[ext_resource type="PackedScene" uid="uid://dgnn47rpn2dn3" path="res://enemies/boid_spawner/boid_spawner.tscn" id="2_87t8v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6drd"]
+size = Vector2(1165, 20)
+
+[node name="boid_test_level" type="Node2D"]
+
+[node name="border" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="border"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D"]
+position = Vector2(572.5, 0)
+shape = SubResource("RectangleShape2D_f6drd")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="border"]
+position = Vector2(6, 640)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D2"]
+position = Vector2(572.5, 0)
+shape = SubResource("RectangleShape2D_f6drd")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="border"]
+position = Vector2(1155, -0.999999)
+rotation = 1.5708
+scale = Vector2(0.56, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D3"]
+position = Vector2(572.5, 0)
+shape = SubResource("RectangleShape2D_f6drd")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="border"]
+position = Vector2(2, 5)
+rotation = 1.5708
+scale = Vector2(0.56, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D4"]
+position = Vector2(572.5, 0)
+shape = SubResource("RectangleShape2D_f6drd")
+
+[node name="boid" parent="." instance=ExtResource("1_hv70h")]
+position = Vector2(400, 494)
+
+[node name="BoidSpawner" parent="." instance=ExtResource("2_87t8v")]
+visible = false
+position = Vector2(234, 501)

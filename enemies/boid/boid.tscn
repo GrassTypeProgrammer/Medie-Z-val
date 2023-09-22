@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dohfarltvx8c"]
+
+[ext_resource type="Texture2D" uid="uid://beljfq2cex77h" path="res://art/basic_shapes/triangle.png" id="1_5xqpy"]
+[ext_resource type="Script" path="res://enemies/boid/boid.gd" id="1_o3hxm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xhgi2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_utq0f"]
+radius = 26.0192
+
+[node name="boid" type="CharacterBody2D" groups=["boid"]]
+script = ExtResource("1_o3hxm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xhgi2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_5xqpy")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_utq0f")

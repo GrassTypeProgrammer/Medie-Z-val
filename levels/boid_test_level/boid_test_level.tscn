@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cf2m3irnpoiys"]
 
-[ext_resource type="PackedScene" uid="uid://dohfarltvx8c" path="res://enemies/boid/boid.tscn" id="1_hv70h"]
 [ext_resource type="PackedScene" uid="uid://dgnn47rpn2dn3" path="res://enemies/boid_spawner/boid_spawner.tscn" id="2_87t8v"]
+[ext_resource type="Texture2D" uid="uid://kfitohfjdy2n" path="res://icon.svg" id="3_svek0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6drd"]
 size = Vector2(1165, 20)
@@ -41,9 +41,9 @@ scale = Vector2(0.56, 1)
 position = Vector2(572.5, 0)
 shape = SubResource("RectangleShape2D_f6drd")
 
-[node name="boid" parent="." instance=ExtResource("1_hv70h")]
-position = Vector2(400, 494)
-
 [node name="BoidSpawner" parent="." instance=ExtResource("2_87t8v")]
-visible = false
-position = Vector2(234, 501)
+position = Vector2(220, 413)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-52, 549)
+texture = ExtResource("3_svek0")

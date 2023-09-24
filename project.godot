@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Medie-Z-val"
-run/main_scene="res://levels/level/level.tscn"
+run/main_scene="res://levels/boid_test_level/boid_test_level.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 

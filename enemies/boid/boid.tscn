@@ -1,16 +1,19 @@
 [gd_scene load_steps=5 format=3 uid="uid://dohfarltvx8c"]
 
-[ext_resource type="Texture2D" uid="uid://beljfq2cex77h" path="res://art/basic_shapes/triangle.png" id="1_5xqpy"]
 [ext_resource type="Script" path="res://enemies/boid/boid.gd" id="1_o3hxm"]
+[ext_resource type="Texture2D" uid="uid://c00e4msem4sq6" path="res://art/basic_shapes/triangleWhite.png" id="2_qumol"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhgi2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_utq0f"]
-radius = 38.0
+radius = 56.0089
 
 [node name="boid" type="CharacterBody2D" groups=["boid"]]
 slide_on_ceiling = false
 script = ExtResource("1_o3hxm")
+_seperation_bias = 0.3
+_heading_bias = 0.3
+_cohesion_bias = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xhgi2")
@@ -18,9 +21,12 @@ shape = SubResource("CircleShape2D_xhgi2")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_5xqpy")
+texture = ExtResource("2_qumol")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_utq0f")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true

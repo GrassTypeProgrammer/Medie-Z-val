@@ -19,8 +19,13 @@ func _set_alignment_multiplier(value:float):
 func _set_cohesion_multiplier(value:float):
 	_cohesion_multiplier = value;
 	
-func _set_separation_distance(value:float):
+func _set_seperation_distance(value:int):
 	_separation_distance = value;
+
+
+@onready var _height: int = ProjectSettings.get_setting("display/window/size/viewport_height");
+@onready var _width: int = ProjectSettings.get_setting("display/window/size/viewport_width");
+
 
 
 @export var _direction_right: bool;
@@ -60,6 +65,8 @@ func _ready():
 #	_set_direction(Vector2.UP);
 	_area.area_entered.connect(_detected_neighbour);
 	_area.area_exited.connect(_remove_neighbour);
+	
+	print();
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -114,12 +121,12 @@ func _get_screen_turn_factor()->Vector2:
 	
 	if(self.global_position.x < 100):
 		screen_turn_factor += Vector2.RIGHT;
-	elif(self.global_position.x > 1000):
+	elif(self.global_position.x > _width-100):
 		screen_turn_factor += Vector2.LEFT;
 	
 	if(self.global_position.y < 100):
 		screen_turn_factor += Vector2.DOWN;
-	elif(self.global_position.y > 600):
+	elif(self.global_position.y > _height-100):
 		screen_turn_factor += Vector2.UP;
 		
 	return screen_turn_factor;

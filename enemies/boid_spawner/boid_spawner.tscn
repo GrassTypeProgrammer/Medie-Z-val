@@ -6,4 +6,25 @@
 [node name="BoidSpawner" type="Node2D"]
 script = ExtResource("1_kj6x3")
 
-[node name="Slider" parent="." instance=ExtResource("2_074is")]
+[node name="SeperationSlider" parent="." instance=ExtResource("2_074is")]
+_max = 1.0
+_value = 0.1
+_label = "Seperation"
+
+[node name="SeperationDistanceSlider" parent="." instance=ExtResource("2_074is")]
+position = Vector2(0, 34)
+_value = 30.0
+_label = "Seperation Distance"
+_step = 1.0
+
+[node name="CohesionSlider" parent="." instance=ExtResource("2_074is")]
+position = Vector2(0, 82)
+_max = 0.25
+_value = 0.05
+_label = "Cohesion"
+
+[node name="AlignmentSlider" parent="." instance=ExtResource("2_074is")]
+position = Vector2(0, 113)
+_max = 1.0
+_value = 0.1
+_label = "Seperation"

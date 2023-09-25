@@ -10,7 +10,6 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(24, 19, 1139, 12, 1140,
 [node name="boid_test_level" type="Node2D"]
 
 [node name="BoidSpawner" parent="." instance=ExtResource("2_87t8v")]
-position = Vector2(220, 413)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_kjigs")

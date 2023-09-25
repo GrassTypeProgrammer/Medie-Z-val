@@ -1,57 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cf2m3irnpoiys"]
+[gd_scene load_steps=3 format=3 uid="uid://cf2m3irnpoiys"]
 
 [ext_resource type="PackedScene" uid="uid://dgnn47rpn2dn3" path="res://enemies/boid_spawner/boid_spawner.tscn" id="2_87t8v"]
-[ext_resource type="PackedScene" uid="uid://cjdcc4xgqpk1o" path="res://construction/wall2.tscn" id="2_uutbr"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6drd"]
-size = Vector2(1165, 20)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kjigs"]
-vertices = PackedVector2Array(746, 489, 1140, 617, 17, 621, 464, 492, 1139, 12, 746, 207, 24, 19, 462, 209)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(2, 6, 7, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(24, 19, 1139, 12, 1140, 617, 17, 621), PackedVector2Array(462, 209, 464, 492, 746, 489, 746, 207)])
+vertices = PackedVector2Array(24, 19, 1139, 12, 1140, 617, 17, 621)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(24, 19, 1139, 12, 1140, 617, 17, 621)])
 
 [node name="boid_test_level" type="Node2D"]
-
-[node name="border" type="Node2D" parent="."]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="border"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D"]
-position = Vector2(572.5, 0)
-shape = SubResource("RectangleShape2D_f6drd")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="border"]
-position = Vector2(6, 640)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D2"]
-position = Vector2(572.5, 0)
-shape = SubResource("RectangleShape2D_f6drd")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="border"]
-position = Vector2(1155, -0.999999)
-rotation = 1.5708
-scale = Vector2(0.56, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D3"]
-position = Vector2(572.5, 0)
-shape = SubResource("RectangleShape2D_f6drd")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="border"]
-position = Vector2(2, 5)
-rotation = 1.5708
-scale = Vector2(0.56, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D4"]
-position = Vector2(572.5, 0)
-shape = SubResource("RectangleShape2D_f6drd")
 
 [node name="BoidSpawner" parent="." instance=ExtResource("2_87t8v")]
 position = Vector2(220, 413)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_kjigs")
-
-[node name="StaticBody2D" parent="." instance=ExtResource("2_uutbr")]
-position = Vector2(607, 350)
-scale = Vector2(1.9, 1.9)

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgnn47rpn2dn3"]
+[gd_scene load_steps=3 format=3 uid="uid://dgnn47rpn2dn3"]
 
 [ext_resource type="Script" path="res://enemies/boid_spawner/boid_spawner.gd" id="1_kj6x3"]
+[ext_resource type="PackedScene" uid="uid://bpg260merwn53" path="res://UI/Components/slider.tscn" id="2_074is"]
 
 [node name="BoidSpawner" type="Node2D"]
 script = ExtResource("1_kj6x3")
+
+[node name="Slider" parent="." instance=ExtResource("2_074is")]

@@ -1,10 +1,27 @@
 extends CharacterBody2D
 
 
-@export var _seperation_bias: float = 0.5;
-@export var _heading_bias: float = 0.5;
-@export var _cohesion_bias: float = 0.1;
-@export var _separation_distance: int = 30;
+var _screen_turn_multiplier: float = 0.1;
+var _seperation_multiplier: float = 0.1;
+var _alignment_multiplier: float = 0.1;
+var _cohesion_multiplier: float = 0.05;
+var _separation_distance: int = 30;
+
+func _set_screen_turn_multiplier(value:float):
+	_screen_turn_multiplier = value;
+
+func _set_seperation_multiplier(value:float):
+	_seperation_multiplier = value;
+
+func _set_alignment_multiplier(value:float):
+	_alignment_multiplier = value;
+	
+func _set_cohesion_multiplier(value:float):
+	_cohesion_multiplier = value;
+	
+func _set_separation_distance(value:float):
+	_separation_distance = value;
+
 
 @export var _direction_right: bool;
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D;
@@ -20,6 +37,9 @@ var _direction: Vector2;
 var _velocity: Vector2;
 var _speed: int = 200;
 var _max_speed: int = 200;
+
+
+
 
 @onready var _area: Area2D = $DetectionArea;
 #var _boid_scene = preload("res://enemies/boid/boid.tscn");
@@ -45,43 +65,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 #	velocity = _direction.normalized() * _speed;
-	_set_state();
 	self.rotation = Vector2(0, -1).angle_to(_direction);
-	
-	
-	_velocity = _direction.normalized() * _speed * delta;
+	_velocity = _direction * _speed * delta;
 	var collision: KinematicCollision2D = move_and_collide(_velocity );
-	
-#	if(collision):
-#		_direction = _collision_reaction_direction(collision);
-#	else:
-#		_direction = _get_flock_direction();
-	var wall_separation = Vector2();
-	var multiplier:float;
-	
-#	if(_walls.size() > 0):
-#		for wall in _walls:
-#			wall_separation += (wall.global_position - self.global_position).normalized();
-#			multiplier = (wall.global_position - self.global_position).length() *0.5;
-#
-#		wall_separation/= _walls.size();
-#
-#	wall_separation *= 1;
-	if(_tier == 0):
-		
-		navigation_agent.target_position = get_global_mouse_position();
-		var next_path_position: Vector2 = navigation_agent.get_next_path_position() + Vector2();
-		_direction = (next_path_position - self.global_position).normalized();
-		
-	else:
-		print(_walls.size());
-		_direction = _get_flock_direction();
-#elif(_state == State.Chasing):
-#	navigation_agent.target_position = get_global_mouse_position();
-#	var next_path_position: Vector2 = navigation_agent.get_next_path_position() + Vector2();
-#	_direction = (next_path_position - self.global_position).normalized();
-#	elif(_state == State.Roaming):
-#		_direction == Vector2(0, 0);
+	_direction = _get_flock_direction();
+
+func _get_velocity()->Vector2:
+	return _velocity;
 
 func _collision_reaction_direction(collision: KinematicCollision2D):
 	var n = collision.get_normal();
@@ -93,50 +83,46 @@ func _collision_reaction_direction(collision: KinematicCollision2D):
 func _set_direction(direction: Vector2):
 	_direction = direction;
 
-func _get_flock_direction()->Vector2:
-	var separation = Vector2();
-	var heading = _direction;
-	var cohesion = Vector2();
-	
-	
-	for neighbour in _neighbours:
-		if(neighbour._get_tier() <= _tier):
-			heading += neighbour._get_direction(); 
 
-		cohesion += neighbour.global_position; 
-		
-		var distance = self.global_position.distance_to(neighbour.global_position);
-			
-		if(distance < _separation_distance):
-			separation -= (neighbour.global_position - self.global_position).normalized() * (_separation_distance / distance *_speed);
+
+func _get_flock_direction()->Vector2:
+	var screen_turn = _get_screen_turn_factor();
+	var cohesion = Vector2();
+	var seperation = Vector2();
+	var alignment = Vector2();
 	
-	if _neighbours.size()>0:
-		heading /= _neighbours.size();
+	for boid in _neighbours:
+		alignment += boid._get_velocity();
+		cohesion += boid.global_position;
+		
+		if((boid.global_position - self.global_position).length() < 40):
+			seperation += self.global_position - boid.global_position;
+	
+	if(_neighbours.size()):
 		cohesion /= _neighbours.size();
-		var center_direction = self.global_position.direction_to(cohesion);
-		var center_speed = _max_speed * self.global_position.distance_to(cohesion)/$DetectionArea/CollisionShape2D.shape.radius;
-		cohesion = center_direction * center_speed;
+		alignment /= _neighbours.size();
 	
-	var mouse2 = get_global_mouse_position() - self.global_position;
-	mouse2.normalized();
-	heading += mouse2;
+	screen_turn = screen_turn.normalized() *_screen_turn_multiplier;
+	seperation = seperation.normalized() * _seperation_multiplier;
+	alignment = alignment.normalized() * _alignment_multiplier;
+	cohesion = cohesion.normalized() * _cohesion_multiplier;
+	return (_direction + screen_turn + seperation + alignment + cohesion).normalized();
 	
-	var wall_separation = Vector2();
-	if(_walls.size() > 0):
-		for wall in _walls:
-			wall_separation += (wall.global_position - self.global_position).normalized();
+
+func _get_screen_turn_factor()->Vector2:
+	var screen_turn_factor = Vector2();
+	
+	if(self.global_position.x < 100):
+		screen_turn_factor += Vector2.RIGHT;
+	elif(self.global_position.x > 1000):
+		screen_turn_factor += Vector2.LEFT;
+	
+	if(self.global_position.y < 100):
+		screen_turn_factor += Vector2.DOWN;
+	elif(self.global_position.y > 600):
+		screen_turn_factor += Vector2.UP;
 		
-		wall_separation/= _walls.size();
-	
-	wall_separation *= 1;
-	separation *= _seperation_bias;
-	heading *= _heading_bias;
-	cohesion *= _cohesion_bias;
-#	return (separation *0.5 + heading * 0.5 + cohesion * 0.1).clamp(Vector2(-_max_speed, -_max_speed),Vector2(_max_speed, _max_speed));
-#	return (mouse2 + separation *0.5 + heading * 0.5 + cohesion * 0.1).clamp(Vector2(-_max_speed, -_max_speed),Vector2(_max_speed, _max_speed));
-#	return (mouse2 + separation  + heading  + cohesion ).clamp(Vector2(-_max_speed, -_max_speed),Vector2(_max_speed, _max_speed));
-	return ( (separation  + heading  + cohesion )).clamp(Vector2(-_max_speed, -_max_speed),Vector2(_max_speed, _max_speed));
-	
+	return screen_turn_factor;
 
 func _set_state():
 	var distance_to_target = (get_global_mouse_position() - self.global_position).length();
@@ -175,7 +161,6 @@ func _get_direction()->Vector2:
 
 func _detected_neighbour(area: Area2D ):
 	if(area.owner.is_in_group('boid')):
-		print('add Neighbour');
 		_neighbours.append(area.owner);
 	else:
 		print('add Wall');
@@ -185,7 +170,6 @@ func _remove_neighbour(area: Area2D):
 	if(area.owner.is_in_group('boid')):
 		var index = _neighbours.find(area.owner);
 		if(index != -1):
-			print('remove Neighbour');
 			_neighbours.remove_at(index);
 	else:
 		var index = _walls.find(area.owner);

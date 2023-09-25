@@ -6,14 +6,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhgi2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_utq0f"]
-radius = 56.0089
+radius = 55.0091
 
 [node name="boid" type="CharacterBody2D" groups=["boid"]]
 slide_on_ceiling = false
 script = ExtResource("1_o3hxm")
-_seperation_bias = 0.3
-_heading_bias = 0.3
-_cohesion_bias = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xhgi2")

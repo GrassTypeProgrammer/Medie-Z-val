@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhgi2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_utq0f"]
-radius = 55.0091
+radius = 98.0051
 
 [node name="boid" type="CharacterBody2D" groups=["boid"]]
 slide_on_ceiling = false

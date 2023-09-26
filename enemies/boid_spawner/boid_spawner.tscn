@@ -27,4 +27,18 @@ _label = "Cohesion"
 position = Vector2(0, 113)
 _max = 1.0
 _value = 0.1
-_label = "Seperation"
+_label = "Alignment"
+
+[node name="ScreenAvoidanceSlider" parent="." instance=ExtResource("2_074is")]
+position = Vector2(1, 144)
+_max = 1.0
+_value = 0.1
+_label = "Edge avoidance"
+
+[node name="SpeedSlider" parent="." instance=ExtResource("2_074is")]
+position = Vector2(1, 175)
+_min = 1.0
+_max = 1000.0
+_value = 200.0
+_label = "Speed"
+_step = 1.0

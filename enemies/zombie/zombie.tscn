@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7gcdjmumhgyj"]
+
+[ext_resource type="Script" path="res://enemies/zombie/zombie.gd" id="1_63cbi"]
+[ext_resource type="Texture2D" uid="uid://dcqowblvpc1q6" path="res://art/zombies/Zombie.svg" id="2_7c25m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_db00r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rc3x2"]
+radius = 98.0051
+
+[node name="Zombie" type="CharacterBody2D"]
+script = ExtResource("1_63cbi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1.19209e-07)
+scale = Vector2(0.0289474, 0.0289474)
+texture = ExtResource("2_7c25m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_db00r")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_rc3x2")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true

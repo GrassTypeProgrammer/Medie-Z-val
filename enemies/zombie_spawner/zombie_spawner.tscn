@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpegyn4nqyo3u"]
+
+[ext_resource type="Script" path="res://enemies/zombie_spawner/zombie_spawner.gd" id="1_17ygo"]
+[ext_resource type="PackedScene" uid="uid://bpg260merwn53" path="res://UI/Components/slider.tscn" id="2_ykxr3"]
+
+[node name="ZombieSpawner" type="Node2D"]
+script = ExtResource("1_17ygo")
+
+[node name="SeperationSlider" parent="." instance=ExtResource("2_ykxr3")]
+_max = 1.0
+_value = 0.1
+_label = "Seperation"
+
+[node name="SeperationDistanceSlider" parent="." instance=ExtResource("2_ykxr3")]
+position = Vector2(0, 34)
+_value = 30.0
+_label = "Seperation Distance"
+_step = 1.0
+
+[node name="CohesionSlider" parent="." instance=ExtResource("2_ykxr3")]
+position = Vector2(0, 82)
+_max = 0.25
+_value = 0.05
+_label = "Cohesion"
+
+[node name="AlignmentSlider" parent="." instance=ExtResource("2_ykxr3")]
+position = Vector2(0, 113)
+_max = 1.0
+_value = 0.1
+_label = "Alignment"
+
+[node name="ScreenAvoidanceSlider" parent="." instance=ExtResource("2_ykxr3")]
+position = Vector2(1, 144)
+_max = 1.0
+_value = 0.1
+_label = "Edge avoidance"
+
+[node name="SpeedSlider" parent="." instance=ExtResource("2_ykxr3")]
+position = Vector2(1, 175)
+_min = 1.0
+_max = 1000.0
+_value = 50.0
+_label = "Speed"
+_step = 1.0
+
+[node name="BiasSlider" parent="." instance=ExtResource("2_ykxr3")]
+position = Vector2(2, 350)
+_max = 1.0
+_value = 0.03
+_label = "Bias"

@@ -5,6 +5,7 @@ var _screen_turn_multiplier: float = 0.1;
 var _seperation_multiplier: float = 0.1;
 var _alignment_multiplier: float = 0.1;
 var _cohesion_multiplier: float = 0.05;
+var _bias_multiplier: float = 0.03;
 var _separation_distance: int = 30;
 var _speed: int = 200;
 
@@ -19,7 +20,10 @@ func _set_alignment_multiplier(value:float):
 	
 func _set_cohesion_multiplier(value:float):
 	_cohesion_multiplier = value;
-	
+
+func _set_bias_multiplier(value:float):
+	_bias_multiplier = value;
+
 func _set_seperation_distance(value:int):
 	_separation_distance = value;
 
@@ -72,6 +76,7 @@ func _get_flock_direction()->Vector2:
 	var cohesion = Vector2();
 	var seperation = Vector2();
 	var alignment = Vector2();
+	var bias = Vector2();
 	
 	for boid in _neighbours:
 		alignment += boid._get_velocity();
@@ -88,7 +93,8 @@ func _get_flock_direction()->Vector2:
 	seperation = seperation.normalized() * _seperation_multiplier;
 	alignment = alignment.normalized() * _alignment_multiplier;
 	cohesion = cohesion.normalized() * _cohesion_multiplier;
-	return (_direction + screen_turn + seperation + alignment + cohesion).normalized();
+	bias = (get_global_mouse_position() - self.global_position).normalized() * _bias_multiplier;
+	return (_direction + screen_turn + seperation + alignment + cohesion + bias).normalized();
 
 
 func _get_screen_turn_factor()->Vector2:

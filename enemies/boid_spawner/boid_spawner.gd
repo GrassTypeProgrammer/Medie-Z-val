@@ -15,6 +15,7 @@ func _ready():
 	$SeperationDistanceSlider._value_changed.connect(_change_seperation_distance_value);
 	$ScreenAvoidanceSlider._value_changed.connect(_change_screen_avoidance_value);
 	$SpeedSlider._value_changed.connect(_change_speed_value);
+	$BiasSlider._value_changed.connect(_change_bias_value);
 	
 func _process(delta):
 	_timer -= delta;
@@ -56,3 +57,9 @@ func _change_speed_value(value_changed: bool):
 	if(value_changed):
 		for boid in _boids:
 			boid._set_speed($SpeedSlider._get_value());
+
+func _change_bias_value(value_changed: bool):
+	if(value_changed):
+		for boid in _boids:
+			boid._set_bias_multiplier($BiasSlider._get_value());
+

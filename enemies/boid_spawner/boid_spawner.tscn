@@ -42,3 +42,9 @@ _max = 1000.0
 _value = 200.0
 _label = "Speed"
 _step = 1.0
+
+[node name="BiasSlider" parent="." instance=ExtResource("2_074is")]
+position = Vector2(2, 350)
+_max = 1.0
+_value = 0.1
+_label = "Bias"

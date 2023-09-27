@@ -8,7 +8,7 @@ var just_selected_character: bool = false;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in 5:
+	for i in 1:
 		var character = char_scene.instantiate();
 		character.position = Vector2(i * 100, 200);
 		character.index = i;

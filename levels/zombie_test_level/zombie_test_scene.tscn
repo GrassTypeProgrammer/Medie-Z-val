@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://pxh6edytb42x"]
 
 [ext_resource type="PackedScene" uid="uid://dpegyn4nqyo3u" path="res://enemies/zombie_spawner/zombie_spawner.tscn" id="1_uq5a2"]
-[ext_resource type="PackedScene" uid="uid://blbiymw23780p" path="res://player/player.tscn" id="2_0khrw"]
+[ext_resource type="PackedScene" uid="uid://bai6sd6bsnbj6" path="res://character_controller/character_controller.tscn" id="2_h7waf"]
 
 [node name="ZombieTestScene" type="Node2D"]
 
 [node name="ZombieSpawner" parent="." instance=ExtResource("1_uq5a2")]
 visible = false
 
-[node name="Player" parent="." instance=ExtResource("2_0khrw")]
+[node name="character_controller" parent="." instance=ExtResource("2_h7waf")]

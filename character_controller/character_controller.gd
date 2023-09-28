@@ -30,7 +30,6 @@ func _try_select_character() -> bool:
 	var clickLocation = get_global_mouse_position();
 	
 	for character in characters:
-		print(clickLocation.distance_to(character.position))
 		if(clickLocation.distance_to(character.position) <= 50):
 			selected_character = character.index;
 			just_selected_character = true;

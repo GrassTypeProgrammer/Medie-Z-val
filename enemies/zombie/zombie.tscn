@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_rc3x2"]
 radius = 98.0051
 
-[node name="Zombie" type="CharacterBody2D"]
+[node name="Zombie" type="CharacterBody2D" groups=["Zombie"]]
 script = ExtResource("1_63cbi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

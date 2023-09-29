@@ -11,7 +11,7 @@ func _ready():
 	for i in 1:
 		var character = char_scene.instantiate();
 		character.position = Vector2(i * 100, 200);
-		character.index = i;
+		character._index = i;
 		add_child(character);
 		characters.push_back(character);
 		

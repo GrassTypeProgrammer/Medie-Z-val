@@ -40,6 +40,8 @@ var _velocity: Vector2;
 var _neighbours:Array = [];
 var _wall_avoidance: Vector2;
 
+var _player_characters_detected_by: Array = [];
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var rng = RandomNumberGenerator.new();
@@ -48,7 +50,7 @@ func _ready():
 	_area.area_exited.connect(_remove_neighbour);
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	self.rotation = Vector2(0, -1).angle_to(_direction);
 	_velocity = _direction * _speed ;
 	velocity = _velocity;
@@ -129,3 +131,18 @@ func _remove_neighbour(area: Area2D):
 		var index = _neighbours.find(area.owner);
 		if(index != -1):
 			_neighbours.remove_at(index);
+
+func _add_player(character: CharacterBody2D):
+	if(!_player_characters_detected_by.find(character)):
+		_player_characters_detected_by.append(character);
+
+func _remove_player(character: CharacterBody2D):
+	var index = _player_characters_detected_by.find(character);
+	if(index != -1):
+		_player_characters_detected_by.remove_at(index);
+
+
+func _notification(notification: int):
+	if (notification == NOTIFICATION_PREDELETE):
+		for character in _player_characters_detected_by:
+			character._remove_zombie(self);

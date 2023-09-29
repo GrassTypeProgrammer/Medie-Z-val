@@ -8,8 +8,14 @@ var _ready: bool = false;
 func _physics_process(delta):
 	if(_ready):
 		self.rotation = Vector2(0, -1).angle_to(_direction);
-		var _velocity = _direction * delta *20;
+		var _velocity = _direction * delta *600;
 		var collision = move_and_collide(_velocity);
+		
+		if(collision):
+			if( collision.get_collider().is_in_group("Zombie")):
+				collision.get_collider().queue_free();
+			
+			self.queue_free();
 
 
 func _set_direction(direction:Vector2):

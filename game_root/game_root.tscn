@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d04rqbqubfq8c"]
+
+[ext_resource type="PackedScene" uid="uid://008djywjffvh" path="res://levels/main_menu/main_menu.tscn" id="1_pdpyl"]
+[ext_resource type="Script" path="res://game_root/main_camera.gd" id="2_miv42"]
+
+[node name="GameRoot" type="Node2D"]
+
+[node name="MainMenu" parent="." instance=ExtResource("1_pdpyl")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_miv42")

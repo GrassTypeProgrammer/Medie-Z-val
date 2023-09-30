@@ -57,6 +57,7 @@ func _ready():
 	_area.area_entered.connect(_detected_neighbour);
 	_area.area_exited.connect(_remove_neighbour);
 	_health_system.on_death.connect(_on_death);
+	
 
 
 func _physics_process(_delta):

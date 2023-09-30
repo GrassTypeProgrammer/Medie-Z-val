@@ -35,6 +35,12 @@ func _set_speed(value:int):
 @onready var _sprite: Sprite2D = $Sprite2D;
 @onready var _area: Area2D = $DetectionArea;
 
+const HealthSystem = preload("res://entities/health_system/health_system.gd");
+@onready var _health_system: HealthSystem = $HealthSystem;
+
+func _get_health_system() -> HealthSystem:
+	return _health_system;
+
 var _direction: Vector2;
 var _velocity: Vector2;
 var _neighbours:Array = [];
@@ -42,12 +48,15 @@ var _wall_avoidance: Vector2;
 
 var _player_characters_detected_by: Array = [];
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var rng = RandomNumberGenerator.new();
 	_set_direction(Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized());
 	_area.area_entered.connect(_detected_neighbour);
 	_area.area_exited.connect(_remove_neighbour);
+	_health_system.on_death.connect(_on_death);
 
 
 func _physics_process(_delta):
@@ -141,8 +150,8 @@ func _remove_player(character: CharacterBody2D):
 	if(index != -1):
 		_player_characters_detected_by.remove_at(index);
 
-
-func _notification(notification: int):
-	if (notification == NOTIFICATION_PREDELETE):
-		for character in _player_characters_detected_by:
+func _on_death():
+	for character in _player_characters_detected_by:
 			character._remove_zombie(self);
+	self.queue_free();
+

@@ -13,7 +13,7 @@ func _physics_process(delta):
 		
 		if(collision):
 			if( collision.get_collider().is_in_group("Zombie")):
-				collision.get_collider().queue_free();
+				collision.get_collider()._get_health_system()._take_damage(10);
 			
 			self.queue_free();
 

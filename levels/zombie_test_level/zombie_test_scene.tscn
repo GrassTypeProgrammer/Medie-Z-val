@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://pxh6edytb42x"]
+[gd_scene load_steps=3 format=3 uid="uid://pxh6edytb42x"]
 
 [ext_resource type="PackedScene" uid="uid://bai6sd6bsnbj6" path="res://character_controller/character_controller.tscn" id="2_h7waf"]
 [ext_resource type="PackedScene" uid="uid://c7gcdjmumhgyj" path="res://enemies/zombie/zombie.tscn" id="4_vj3kd"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nr0wp"]
-size = Vector2(20, 437)
 
 [node name="ZombieTestScene" type="Node2D"]
 
@@ -12,9 +9,3 @@ size = Vector2(20, 437)
 
 [node name="Zombie" parent="." instance=ExtResource("4_vj3kd")]
 position = Vector2(376, 310)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(340, 263.5)
-shape = SubResource("RectangleShape2D_nr0wp")

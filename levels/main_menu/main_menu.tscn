@@ -18,10 +18,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -255.0
-offset_top = -120.0
-offset_right = 255.0
-offset_bottom = 120.0
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 161.0
+offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -39,4 +39,3 @@ text = "Quit
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-ignore_rotation = false

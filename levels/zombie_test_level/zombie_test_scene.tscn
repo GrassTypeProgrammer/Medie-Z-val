@@ -8,4 +8,4 @@
 [node name="character_controller" parent="." instance=ExtResource("2_h7waf")]
 
 [node name="Zombie" parent="." instance=ExtResource("4_vj3kd")]
-position = Vector2(376, 310)
+position = Vector2(190, 121)

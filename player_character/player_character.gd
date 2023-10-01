@@ -3,7 +3,7 @@ extends CharacterBody2D
 var destination: Vector2;
 var direction: Vector2;
 var moving: bool = false;
-const speed: int = 200;
+const speed: int = 50;
 var _index: int;
 var arrow_scene = preload("res://Ammo/arrow/arrow.tscn");
 @onready var _area: Area2D = $DetectionArea;
@@ -13,6 +13,8 @@ var _zombies:Array = [];
 var _reload_time: float = 1;
 var _reload_timer: float = _reload_time;
 var _can_fire_arrow: float = true;
+
+var testTimer: float = .25;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,6 +42,7 @@ func _process(delta):
 	
 	if(_zombies.size() > 0 &&_can_fire_arrow):
 		_spawn_arrow();
+	
 
 
 func _spawn_arrow():
@@ -57,11 +60,13 @@ func _set_destination(new_destination: Vector2):
 	moving = true;
 
 func _move_to_destination(delta):
-	position += direction * delta * speed;
+	position += ( direction * delta * speed);
+	position = Vector2(snapped(position.x, 1), snapped(position.y, 1));
 		
 	if(position.distance_to(destination) < 10):
 #		print(position.distance_to(destination));
 		moving = false;
+	
 
 func _detect_zombie(body: Node2D):
 	if( body.is_in_group('Zombie')):

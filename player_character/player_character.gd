@@ -3,7 +3,7 @@ extends CharacterBody2D
 var destination: Vector2;
 var direction: Vector2;
 var moving: bool = false;
-const speed: int = 50;
+const speed: int = 200;
 var _index: int;
 var arrow_scene = preload("res://Ammo/arrow/arrow.tscn");
 @onready var _area: Area2D = $DetectionArea;
@@ -15,7 +15,6 @@ var _reload_time: float = 1;
 var _reload_timer: float = _reload_time;
 var _can_fire_arrow: float = true;
 
-var testTimer: float = .25;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,7 +61,7 @@ func _set_destination(new_destination: Vector2):
 	moving = true;
 
 func _move_to_destination(delta):
-	velocity =  (_navAgent.get_next_path_position()-global_position).normalized() * 100;
+	velocity =  (_navAgent.get_next_path_position()-global_position).normalized() * speed;
 	move_and_slide();
 #	global_position =  Vector2(snapped(global_position.x, 1), snapped(global_position.y, 1));
 #	$icon.global_position =  Vector2(snapped(global_position.x, 1), snapped(global_position.y, 1));

@@ -7,6 +7,7 @@ const speed: int = 50;
 var _index: int;
 var arrow_scene = preload("res://Ammo/arrow/arrow.tscn");
 @onready var _area: Area2D = $DetectionArea;
+@onready var _navAgent: NavigationAgent2D = $NavigationAgent2D;
 
 var _zombies:Array = [];
 
@@ -55,17 +56,22 @@ func _spawn_arrow():
 
 
 func _set_destination(new_destination: Vector2):
-	destination = new_destination;
-	direction =  position.direction_to(new_destination);
+	_navAgent.target_position = new_destination;
+#	destination = new_destination;
+#	direction =  position.direction_to(new_destination);
 	moving = true;
 
 func _move_to_destination(delta):
-	position += ( direction * delta * speed);
-	position = Vector2(snapped(position.x, 1), snapped(position.y, 1));
-		
-	if(position.distance_to(destination) < 10):
-#		print(position.distance_to(destination));
-		moving = false;
+	velocity =  (_navAgent.get_next_path_position()-global_position).normalized() * 100;
+	move_and_slide();
+#	global_position =  Vector2(snapped(global_position.x, 1), snapped(global_position.y, 1));
+#	$icon.global_position =  Vector2(snapped(global_position.x, 1), snapped(global_position.y, 1));
+#	position += ( direction * delta * speed);
+#	position = Vector2(snapped(position.x, 1), snapped(position.y, 1));
+#
+#	if(position.distance_to(destination) < 10):
+##		print(position.distance_to(destination));
+#		moving = false;
 	
 
 func _detect_zombie(body: Node2D):

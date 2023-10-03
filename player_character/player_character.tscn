@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cdopd0y081d2t"]
 
 [ext_resource type="Script" path="res://player_character/player_character.gd" id="1_43iwe"]
-[ext_resource type="Texture2D" uid="uid://4lwaayy27kul" path="res://art/player/Player.png" id="2_h7vd6"]
+[ext_resource type="Texture2D" uid="uid://bjhtkc6wxbvgo" path="res://art/player/player2.png" id="2_x0iel"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8m2kh"]
 radius = 7.07107
@@ -14,7 +14,7 @@ script = ExtResource("1_43iwe")
 metadata/_edit_vertical_guides_ = [-48.0]
 
 [node name="icon" type="Sprite2D" parent="."]
-texture = ExtResource("2_h7vd6")
+texture = ExtResource("2_x0iel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8m2kh")
@@ -23,3 +23,6 @@ shape = SubResource("CircleShape2D_8m2kh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_l4qi4")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true

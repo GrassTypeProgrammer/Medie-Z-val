@@ -1,20 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdopd0y081d2t"]
+[gd_scene load_steps=6 format=3 uid="uid://cdopd0y081d2t"]
 
 [ext_resource type="Script" path="res://player_character/player_character.gd" id="1_43iwe"]
 [ext_resource type="Texture2D" uid="uid://c82hlii6wnwth" path="res://art/player/player.svg" id="2_ak4bn"]
+[ext_resource type="PackedScene" uid="uid://cd4d56h700r13" path="res://entities/health_system/health_system.tscn" id="3_jdqh8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8m2kh"]
-radius = 32.0156
+radius = 33.1361
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l4qi4"]
-radius = 201.002
+radius = 286.063
 
-[node name="player_character" type="CharacterBody2D"]
+[node name="player_character" type="CharacterBody2D" groups=["PlayerCharacter"]]
 script = ExtResource("1_43iwe")
 metadata/_edit_vertical_guides_ = [-48.0]
 
 [node name="icon" type="Sprite2D" parent="."]
-scale = Vector2(0.0947368, 0.0947369)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_ak4bn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -27,3 +28,5 @@ shape = SubResource("CircleShape2D_l4qi4")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
+
+[node name="HealthSystem" parent="." instance=ExtResource("3_jdqh8")]

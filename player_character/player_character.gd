@@ -15,6 +15,14 @@ var _reload_time: float = 1;
 var _reload_timer: float = _reload_time;
 var _can_fire_arrow: float = true;
 
+const HealthSystem = preload("res://entities/health_system/health_system.gd");
+@onready var _health_system: HealthSystem = $HealthSystem;
+
+func _get_health_system() -> HealthSystem:
+	return _health_system;
+
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,6 +33,7 @@ func _ready():
 	
 	_area.body_entered.connect(_detect_zombie);
 	_area.body_exited.connect(_on_collision_exit);
+	_health_system.on_death.connect(_on_death);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -40,8 +49,8 @@ func _process(delta):
 			
 	
 	
-	if(_zombies.size() > 0 &&_can_fire_arrow):
-		_spawn_arrow();
+#	if(_zombies.size() > 0 &&_can_fire_arrow):
+#		_spawn_arrow();
 	
 
 
@@ -92,3 +101,7 @@ func _remove_zombie(body: Node2D):
 	if(index != -1):
 		_zombies.remove_at(index);
 		print(_zombies.size());
+
+func _on_death():
+	print('Tell char controller');
+	self.queue_free();

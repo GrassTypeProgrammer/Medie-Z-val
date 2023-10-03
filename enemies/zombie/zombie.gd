@@ -46,7 +46,10 @@ var _velocity: Vector2;
 var _neighbours:Array = [];
 var _wall_avoidance: Vector2;
 
+#characters that have detected the zombie
 var _player_characters_detected_by: Array = [];
+#character that the zombie has detected
+var _player_characters_detected: Array=[];
 
 
 
@@ -60,14 +63,32 @@ func _ready():
 	
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	self.rotation = Vector2(0, -1).angle_to(_direction);
+	
+	if(_player_characters_detected.size() > 0 &&
+	 self.global_position.distance_to(_player_characters_detected[0].global_position) < 70):
+		_attack(delta);
+	else:
+		_movement();
+
+var _attack_time: float = 0.5;
+var _attack_timer:float = 0;
+
+func _attack(delta: float):
+	if(_attack_timer > 0):
+		_attack_timer -= delta;
+	else:
+		_attack_timer = _attack_time;
+		_player_characters_detected[0]._health_system._take_damage(10);
+		print('attack');
+
+func _movement():
 	_velocity = _direction * _speed ;
 	velocity = _velocity;
 #	var collision: KinematicCollision2D = move_and_collide(_velocity );
 	move_and_slide();
-	_direction = _get_flock_direction();
-
+	_direction = _get_player_direction();
 
 func _get_velocity()->Vector2:
 	return _velocity;
@@ -84,6 +105,13 @@ func _collision_reaction_direction(collision: KinematicCollision2D):
 func _set_direction(direction: Vector2):
 	_direction = direction;
 
+func _get_player_direction()->Vector2:
+	var direction = Vector2();
+	
+	if(_player_characters_detected.size() > 0):
+		direction = (_player_characters_detected[0].global_position - self.global_position).normalized();
+	
+	return direction;
 
 func _get_flock_direction()->Vector2:
 	var screen_turn = _get_screen_turn_factor();
@@ -134,6 +162,8 @@ func _get_direction()->Vector2:
 func _detected_neighbour(area: Area2D ):
 	if(area.owner.is_in_group('boid')):
 		_neighbours.append(area.owner);
+	elif(area.owner.is_in_group('PlayerCharacter')):
+		_player_characters_detected.append(area.owner);
 
 
 func _remove_neighbour(area: Area2D):
@@ -141,6 +171,10 @@ func _remove_neighbour(area: Area2D):
 		var index = _neighbours.find(area.owner);
 		if(index != -1):
 			_neighbours.remove_at(index);
+	elif(area.owner.is_in_group('PlayerCharacter')):
+		var index = _player_characters_detected.find(area.owner);
+		if(index != -1):
+			_player_characters_detected.remove_at(index);
 
 func _add_player(character: CharacterBody2D):
 	if(!_player_characters_detected_by.find(character)):

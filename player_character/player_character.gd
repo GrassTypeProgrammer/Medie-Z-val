@@ -26,11 +26,6 @@ func _get_health_system() -> HealthSystem:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print('Awake: ');
-	print(_index);
-	
-	
-	
 	_area.body_entered.connect(_detect_zombie);
 	_area.body_exited.connect(_on_collision_exit);
 	_health_system.on_death.connect(_on_death);
@@ -39,7 +34,7 @@ func _ready():
 func _process(delta):
 	if(moving):
 		_move_to_destination(delta);
-	
+		
 	if(!_can_fire_arrow ):
 		if(_reload_timer > 0):
 			_reload_timer -= delta;
@@ -65,22 +60,16 @@ func _spawn_arrow():
 
 func _set_destination(new_destination: Vector2):
 	_navAgent.target_position = new_destination;
-#	destination = new_destination;
-#	direction =  position.direction_to(new_destination);
 	moving = true;
+
 
 func _move_to_destination(delta):
 	velocity =  (_navAgent.get_next_path_position()-global_position).normalized() * speed;
 	move_and_slide();
-#	global_position =  Vector2(snapped(global_position.x, 1), snapped(global_position.y, 1));
-#	$icon.global_position =  Vector2(snapped(global_position.x, 1), snapped(global_position.y, 1));
-#	position += ( direction * delta * speed);
-#	position = Vector2(snapped(position.x, 1), snapped(position.y, 1));
-#
-#	if(position.distance_to(destination) < 10):
-##		print(position.distance_to(destination));
-#		moving = false;
 	
+	if(_navAgent.distance_to_target() < 5):
+		moving = false;
+
 
 func _detect_zombie(body: Node2D):
 	if( body.is_in_group('Zombie')):

@@ -4,16 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://c7gcdjmumhgyj" path="res://enemies/zombie/zombie.tscn" id="4_vj3kd"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_qd7ch"]
-vertices = PackedVector2Array(1921, 0, 1921, 1084, 1, 1082, -13, -15)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1921, 0, 1921, 1084, 1, 1082, -13, -15)])
+vertices = PackedVector2Array(1921, 1084, 1, 1082, 829, 546, 1921, 0, 590, 557, -13, -15, 585, 194, 824, 191)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(4, 1, 5, 6), PackedInt32Array(6, 5, 3, 7), PackedInt32Array(7, 3, 2)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1921, 0, 1921, 1084, 1, 1082, -13, -15), PackedVector2Array(585, 194, 824, 191, 829, 546, 590, 557)])
 
 [node name="ZombieTestScene" type="Node2D"]
 
 [node name="character_controller" parent="." instance=ExtResource("2_h7waf")]
 
-[node name="Zombie" parent="." instance=ExtResource("4_vj3kd")]
-position = Vector2(190, 121)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_qd7ch")
+
+[node name="Zombie" parent="." instance=ExtResource("4_vj3kd")]
+position = Vector2(190, 121)

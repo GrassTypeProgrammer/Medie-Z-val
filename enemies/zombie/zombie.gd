@@ -2,12 +2,12 @@ extends CharacterBody2D
 
 
 var _screen_turn_multiplier: float = 0.1;
-var _seperation_multiplier: float = 0.1;
+var _seperation_multiplier: float = 1;
 var _alignment_multiplier: float = 0.1;
 var _cohesion_multiplier: float = 0.05;
 var _bias_multiplier: float = 0.03;
-var _separation_distance: int = 30;
-var _speed: int = 50;
+var _separation_distance: int = 70;
+var _speed: int = 150;
 
 func _set_screen_turn_multiplier(value:float):
 	_screen_turn_multiplier = value;
@@ -34,6 +34,7 @@ func _set_speed(value:int):
 @onready var _width: int = ProjectSettings.get_setting("display/window/size/viewport_width");
 @onready var _sprite: Sprite2D = $Sprite2D;
 @onready var _area: Area2D = $DetectionArea;
+@onready var _navAgent: NavigationAgent2D = $NavigationAgent2D;
 
 const HealthSystem = preload("res://entities/health_system/health_system.gd");
 @onready var _health_system: HealthSystem = $HealthSystem;
@@ -51,7 +52,8 @@ var _player_characters_detected_by: Array = [];
 #character that the zombie has detected
 var _player_characters_detected: Array=[];
 
-
+static var nextID = 1;
+var ID;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -60,17 +62,31 @@ func _ready():
 	_area.area_entered.connect(_detected_neighbour);
 	_area.area_exited.connect(_remove_neighbour);
 	_health_system.on_death.connect(_on_death);
-	
+	_navAgent.avoidance_enabled = true;
+	_navAgent.velocity_computed.connect(_safe_velocity_computed);
+	ID = nextID;
+	nextID+=1;
+	_navAgent.radius = 30;
+	if(ID != 1):
+		_navAgent.debug_enabled = false;
 
+func _safe_velocity_computed(safe_velocity: Vector2):
+	velocity = safe_velocity;
+	move_and_slide();
+	if(ID == 1):
+		print('safe Velocity: ' + str(safe_velocity));
 
 func _physics_process(delta):
 	self.rotation = Vector2(0, -1).angle_to(_direction);
 	
+	
 	if(_player_characters_detected.size() > 0 &&
 	 self.global_position.distance_to(_player_characters_detected[0].global_position) < 70):
-		_attack(delta);
+		pass;
+#		_attack(delta);
 	else:
 		_movement();
+
 
 var _attack_time: float = 0.5;
 var _attack_timer:float = 0;
@@ -84,11 +100,25 @@ func _attack(delta: float):
 		print('attack');
 
 func _movement():
-	_velocity = _direction * _speed ;
+	if(_player_characters_detected.size() > 0):
+		_navAgent.target_position = _player_characters_detected[0].global_position;
+	
+	var seperation = Vector2();
+	for boid in _neighbours:
+		
+		if((boid.global_position - self.global_position).length() < 40):
+			seperation += self.global_position - boid.global_position;
+	
+	seperation = seperation.normalized() * _seperation_multiplier;
+	
+	_velocity = (_direction + seperation )* _speed ;
+	if(ID == 1):
+		print('velocity: ' + str(_velocity));
 	velocity = _velocity;
+	_navAgent.set_velocity(velocity);
 #	var collision: KinematicCollision2D = move_and_collide(_velocity );
-	move_and_slide();
-	_direction = _get_player_direction();
+#	move_and_slide();
+	_direction = (_navAgent.get_next_path_position() - global_position).normalized();
 
 func _get_velocity()->Vector2:
 	return _velocity;

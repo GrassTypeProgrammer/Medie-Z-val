@@ -73,8 +73,7 @@ func _ready():
 func _safe_velocity_computed(safe_velocity: Vector2):
 	velocity = safe_velocity;
 	move_and_slide();
-	if(ID == 1):
-		print('safe Velocity: ' + str(safe_velocity));
+
 
 func _physics_process(delta):
 	self.rotation = Vector2(0, -1).angle_to(_direction);
@@ -83,7 +82,7 @@ func _physics_process(delta):
 	if(_player_characters_detected.size() > 0 &&
 	 self.global_position.distance_to(_player_characters_detected[0].global_position) < 70):
 		pass;
-#		_attack(delta);
+		_attack(delta);
 	else:
 		_movement();
 
@@ -112,8 +111,7 @@ func _movement():
 	seperation = seperation.normalized() * _seperation_multiplier;
 	
 	_velocity = (_direction + seperation )* _speed ;
-	if(ID == 1):
-		print('velocity: ' + str(_velocity));
+
 	velocity = _velocity;
 	_navAgent.set_velocity(velocity);
 #	var collision: KinematicCollision2D = move_and_collide(_velocity );

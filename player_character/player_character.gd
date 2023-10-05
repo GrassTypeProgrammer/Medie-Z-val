@@ -22,7 +22,7 @@ func _get_health_system() -> HealthSystem:
 	return _health_system;
 
 
-
+signal on_death;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,8 +44,8 @@ func _process(delta):
 			
 	
 	
-#	if(_zombies.size() > 0 &&_can_fire_arrow):
-#		_spawn_arrow();
+	if(_zombies.size() > 0 &&_can_fire_arrow):
+		_spawn_arrow();
 	
 
 
@@ -92,5 +92,5 @@ func _remove_zombie(body: Node2D):
 		print(_zombies.size());
 
 func _on_death():
-	print('Tell char controller');
+	on_death.emit(self);
 	self.queue_free();

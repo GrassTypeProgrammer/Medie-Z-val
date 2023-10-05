@@ -12,12 +12,20 @@ func _ready():
 		var character = char_scene.instantiate();
 		character.position = Vector2(i * 100, 200);
 		character._index = i;
+		character.on_death.connect(_characterDeath);
 		add_child(character);
 		characters.push_back(character);
 		
-	
-	
 
+
+func _characterDeath(char_scene):
+	var index = characters.find(char_scene);
+	if(index != -1):
+		characters.remove_at(index);
+	
+	if(characters.size() == 0):
+		print('Game Over!');
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

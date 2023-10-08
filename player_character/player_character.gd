@@ -77,6 +77,7 @@ func _detect_zombie(body: Node2D):
 		body._add_player(self);
 		print('Zombie!!!');
 
+
 func _on_collision_exit(body: Node2D):
 	if( body.is_in_group('Zombie')):
 		var index = _zombies.find(body);
@@ -85,11 +86,13 @@ func _on_collision_exit(body: Node2D):
 			_zombies.remove_at(index);
 			print('Zombie Leave!!!');
 
+
 func _remove_zombie(body: Node2D):
 	var index = _zombies.find(body);
 	if(index != -1):
 		_zombies.remove_at(index);
 		print(_zombies.size());
+
 
 func _on_death():
 	on_death.emit(self);

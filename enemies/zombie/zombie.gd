@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+const Character = preload("res://player_character/player_character.gd");
 var _seperation_multiplier: float = 1;
 var _speed: int = 150;
 var _separation_distance: int = 70;
@@ -21,10 +21,8 @@ var _velocity: Vector2;
 var _neighbours:Array = [];
 var _wall_avoidance: Vector2;
 
-#characters that have detected the zombie
-var _player_characters_detected_by: Array = [];
 #character that the zombie has detected
-var _player_characters_detected: Array=[];
+var _player_characters: Array[Character] =[];
 
 static var nextID = 1;
 var ID;
@@ -32,6 +30,7 @@ var ID;
 var _attack_time: float = 0.5;
 var _attack_timer:float = 0;
 
+signal on_death;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,6 +47,7 @@ func _ready():
 	if(ID != 1):
 		_navAgent.debug_enabled = false;
 
+
 func _safe_velocity_computed(safe_velocity: Vector2):
 	velocity = safe_velocity;
 	move_and_slide();
@@ -56,8 +56,8 @@ func _safe_velocity_computed(safe_velocity: Vector2):
 func _physics_process(delta):
 	self.rotation = Vector2(0, -1).angle_to(_direction);
 	
-	if(_player_characters_detected.size() > 0 &&
-	 self.global_position.distance_to(_player_characters_detected[0].global_position) < 70):
+	if(_player_characters.size() > 0 &&
+	 self.global_position.distance_to(_player_characters[0].global_position) < 70):
 		pass;
 		_attack(delta);
 	else:
@@ -69,13 +69,13 @@ func _attack(delta: float):
 		_attack_timer -= delta;
 	else:
 		_attack_timer = _attack_time;
-		_player_characters_detected[0]._health_system._take_damage(10);
+		_player_characters[0]._health_system._take_damage(10);
 		print('attack');
 
 
 func _movement():
-	if(_player_characters_detected.size() > 0):
-		_navAgent.target_position = _player_characters_detected[0].global_position;
+	if(_player_characters.size() > 0):
+		_navAgent.target_position = _player_characters[0].global_position;
 	
 	var seperation = Vector2();
 	for boid in _neighbours:
@@ -98,8 +98,8 @@ func _set_direction(direction: Vector2):
 func _get_player_direction()->Vector2:
 	var direction = Vector2();
 	
-	if(_player_characters_detected.size() > 0):
-		direction = (_player_characters_detected[0].global_position - self.global_position).normalized();
+	if(_player_characters.size() > 0):
+		direction = (_player_characters[0].global_position - self.global_position).normalized();
 	
 	return direction;
 
@@ -111,27 +111,21 @@ func _get_direction()->Vector2:
 
 func _detected_neighbour(area: Area2D ):
 	if(area.owner.is_in_group('PlayerCharacter')):
-		_player_characters_detected.append(area.owner);
+		_player_characters.append(area.owner);
 
 
 func _remove_neighbour(area: Area2D):
 	if(area.owner.is_in_group('PlayerCharacter')):
-		var index = _player_characters_detected.find(area.owner);
+		var index = _player_characters.find(area.owner);
 		if(index != -1):
-			_player_characters_detected.remove_at(index);
+			_player_characters.remove_at(index);
 
-
-func _add_player(character: CharacterBody2D):
-	if(!_player_characters_detected_by.find(character)):
-		_player_characters_detected_by.append(character);
-
-func _remove_player(character: CharacterBody2D):
-	var index = _player_characters_detected_by.find(character);
+func _remove_character(character: Character):
+	var index = _player_characters.find(character);
 	if(index != -1):
-		_player_characters_detected_by.remove_at(index);
+		_player_characters.remove_at(index);
+
 
 func _on_death():
-	for character in _player_characters_detected_by:
-			character._remove_zombie(self);
+	on_death.emit(self);
 	self.queue_free();
-

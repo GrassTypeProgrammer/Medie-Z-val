@@ -1,13 +1,22 @@
 extends CharacterBody2D
 
+#Types
+const Zombie = preload("res://enemies/zombie/zombie.gd");
+const HealthSystem = preload("res://entities/health_system/health_system.gd");
+
+#scenes
+const arrow_scene = preload("res://Ammo/arrow/arrow.tscn");
+
+#onready
+@onready var _area: Area2D = $DetectionArea;
+@onready var _navAgent: NavigationAgent2D = $NavigationAgent2D;
+@onready var _health_system: HealthSystem = $HealthSystem;
+
 var destination: Vector2;
 var direction: Vector2;
 var moving: bool = false;
 const speed: int = 200;
 var _index: int;
-var arrow_scene = preload("res://Ammo/arrow/arrow.tscn");
-@onready var _area: Area2D = $DetectionArea;
-@onready var _navAgent: NavigationAgent2D = $NavigationAgent2D;
 
 var _zombies:Array = [];
 
@@ -15,8 +24,6 @@ var _reload_time: float = 1;
 var _reload_timer: float = _reload_time;
 var _can_fire_arrow: float = true;
 
-const HealthSystem = preload("res://entities/health_system/health_system.gd");
-@onready var _health_system: HealthSystem = $HealthSystem;
 
 func _get_health_system() -> HealthSystem:
 	return _health_system;
@@ -44,8 +51,8 @@ func _process(delta):
 			
 	
 	
-	if(_zombies.size() > 0 &&_can_fire_arrow):
-		_spawn_arrow();
+#	if(_zombies.size() > 0 &&_can_fire_arrow):
+#		_spawn_arrow();
 	
 
 
@@ -74,7 +81,6 @@ func _move_to_destination(delta):
 func _detect_zombie(body: Node2D):
 	if( body.is_in_group('Zombie')):
 		_zombies.append((body));
-		body._add_player(self);
 		print('Zombie!!!');
 
 
@@ -82,13 +88,12 @@ func _on_collision_exit(body: Node2D):
 	if( body.is_in_group('Zombie')):
 		var index = _zombies.find(body);
 		if(index != -1):
-			_zombies[index]._remove_player(self);
 			_zombies.remove_at(index);
 			print('Zombie Leave!!!');
 
 
-func _remove_zombie(body: Node2D):
-	var index = _zombies.find(body);
+func _remove_zombie(zombie: Zombie):
+	var index = _zombies.find(zombie);
 	if(index != -1):
 		_zombies.remove_at(index);
 		print(_zombies.size());

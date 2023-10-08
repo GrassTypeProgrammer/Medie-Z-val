@@ -31,12 +31,13 @@ var _attack_time: float = 0.5;
 var _attack_timer:float = 0;
 
 signal on_death;
+signal needs_new_target;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var rng = RandomNumberGenerator.new();
 	_set_direction(Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized());
-	_area.area_entered.connect(_detected_neighbour);
+#	_area.area_entered.connect(_detected_neighbour);
 	_area.area_exited.connect(_remove_neighbour);
 	_health_system.on_death.connect(_on_death);
 	_navAgent.avoidance_enabled = true;
@@ -44,6 +45,8 @@ func _ready():
 	ID = nextID;
 	nextID+=1;
 	_navAgent.radius = 30;
+	needs_new_target.emit(self);
+	
 	if(ID != 1):
 		_navAgent.debug_enabled = false;
 
@@ -109,9 +112,11 @@ func _get_direction()->Vector2:
 	return _direction;
 
 
-func _detected_neighbour(area: Area2D ):
-	if(area.owner.is_in_group('PlayerCharacter')):
-		_player_characters.append(area.owner);
+func _setTarget(character: Character):
+	_player_characters.append(character);
+#func _detected_neighbour(area: Area2D ):
+#	if(area.owner.is_in_group('PlayerCharacter')):
+#		_player_characters.append(area.owner);
 
 
 func _remove_neighbour(area: Area2D):
@@ -124,6 +129,8 @@ func _remove_character(character: Character):
 	var index = _player_characters.find(character);
 	if(index != -1):
 		_player_characters.remove_at(index);
+		if(_player_characters.size() == 0):
+			needs_new_target.emit(self);
 
 
 func _on_death():

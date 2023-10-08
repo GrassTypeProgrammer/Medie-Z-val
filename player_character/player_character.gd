@@ -70,7 +70,7 @@ func _set_destination(new_destination: Vector2):
 	moving = true;
 
 
-func _move_to_destination(delta):
+func _move_to_destination(_delta):
 	velocity =  (_navAgent.get_next_path_position()-global_position).normalized() * speed;
 	move_and_slide();
 	
@@ -102,3 +102,4 @@ func _remove_zombie(zombie: Zombie):
 func _on_death():
 	on_death.emit(self);
 	self.queue_free();
+

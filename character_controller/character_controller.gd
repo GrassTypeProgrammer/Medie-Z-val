@@ -29,9 +29,9 @@ func _ready():
 
 func _characterDeath(character: Character):
 	character_died.emit(character);
-	var index = characters.find(character);
+	var character_index = characters.find(character);
 	if(index != -1):
-		characters.remove_at(index);
+		characters.remove_at(character_index);
 	
 	if(characters.size() == 0):
 		print('Game Over!');
@@ -83,3 +83,19 @@ func _zombieDied(zombie: Zombie):
 	for character in characters:
 		character._remove_zombie(zombie);
 
+
+func _getClosestCharacter(origin: Vector2) -> Character:
+	var closestIndex: int = 0;
+	var closestDistance: float;
+	
+	for i in characters.size():
+		var distance: float = characters[i].global_position.distance_to(origin);
+		
+		if(i == 0):
+			closestIndex = i;
+			closestDistance = distance;
+		elif(distance < closestDistance):
+			closestIndex = i;
+			closestDistance = distance;
+	
+	return characters[closestIndex];

@@ -39,11 +39,14 @@ func _process(delta):
 		var zombie: Zombie = _zombie_scene.instantiate();
 		zombie.global_position = self.global_position;
 		zombie.on_death.connect(_zombieDied); 
+		zombie.needs_new_target.connect(_getNewTarget);
 		_zombies.append(zombie);
+		
 		add_child(zombie);
 		_counter+= 1;
 	
 	_spawnRateIncreaseTimer(delta);
+
 
 func _spawnRateIncreaseTimer(delta: float):
 	if(_spawnTime > _minSpawnRateTime):
@@ -67,4 +70,6 @@ func _characterDied(character: Character):
 	for zombie in _zombies:
 		zombie._remove_character(character);
 
-
+func _getNewTarget(zombie: Zombie):
+	var character = _characterSpawner._get_closest_character(zombie.global_position);
+	zombie._setTarget(character);

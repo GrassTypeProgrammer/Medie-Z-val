@@ -53,6 +53,20 @@ func _spawnZombies(delta: float):
 
 func _setGameStarted():
 	gameStarted = true;
+	_initialiseVariables();
+	_onRestart();
+
+func _initialiseVariables():
+	_timer= 0;
+	_spawnTime = 2;
+	_counter = 0;
+	_max_count = 50;
+	
+	_increaseSpawnRateTime = 5;
+	_increaseSpawnRateTimer = _increaseSpawnRateTime;
+	_increaseSpawnRateInterval = 0.2;
+	_minSpawnRateTime = 0.3;
+
 
 func _spawnRateIncreaseTimer(delta: float):
 	if(_spawnTime > _minSpawnRateTime):
@@ -79,3 +93,9 @@ func _characterDied(character: Character):
 func _getNewTarget(zombie: Zombie):
 	var character = _characterSpawner._get_closest_character(zombie.global_position);
 	zombie._setTarget(character);
+
+func _onRestart():
+	for zombie in _zombies:
+		zombie.queue_free();
+	
+	_zombies.clear();

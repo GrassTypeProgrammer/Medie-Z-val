@@ -23,7 +23,16 @@ func _initialise():
 	_zombieSpawner.zombie_died.connect(_zombieDied);
 	GameManager.start_game.connect(_spawnCharacters);
 
+func _clearCharacters():
+	for character in characters:
+		character.queue_free();
+	
+	characters.clear();
+
 func _spawnCharacters():
+	_clearCharacters();
+	index = 0;
+	
 	for i in 1:
 		var character: Character = char_scene.instantiate();
 		character.position = Vector2(i * 100, 200);

@@ -31,7 +31,7 @@ size_flags_vertical = 4
 theme_override_constants/margin_left = 700
 theme_override_constants/margin_right = 700
 
-[node name="Button" type="Button" parent="Control/VBoxContainer/MarginContainer"]
+[node name="RestartButton" type="Button" parent="Control/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Restart?"

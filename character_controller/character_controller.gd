@@ -45,8 +45,9 @@ func _characterDeath(character: Character):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if(Input.is_action_just_pressed('select')):
-		_on_select();
+	if(characters.size() > 0):
+		if(Input.is_action_just_pressed('select')):
+			_on_select();
 	
 
 

@@ -30,7 +30,10 @@ func _togglePause():
 # TODO: Luke this needs to actually load the level. Then, when loaded, emit start game.
 func _loadLevel():
 	start_game.emit();
+	currentGameState = GameState.InGame;
 
 
 func _gameOver():
 	game_over.emit();
+	print('Game Over!');
+	currentGameState = GameState.GameOver;

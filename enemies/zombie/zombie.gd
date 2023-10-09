@@ -59,7 +59,7 @@ func _safe_velocity_computed(safe_velocity: Vector2):
 func _physics_process(delta):
 	self.rotation = Vector2(0, -1).angle_to(_direction);
 	
-	if(_player_characters.size() > 0 &&
+	if(_player_characters.size() > 0 && _player_characters[0] != null &&
 	 self.global_position.distance_to(_player_characters[0].global_position) < 70):
 		pass;
 		_attack(delta);
@@ -77,7 +77,7 @@ func _attack(delta: float):
 
 
 func _movement():
-	if(_player_characters.size() > 0):
+	if(_player_characters.size() > 0 && _player_characters[0] != null):
 		_navAgent.target_position = _player_characters[0].global_position;
 	
 	var seperation = Vector2();
@@ -101,7 +101,7 @@ func _set_direction(direction: Vector2):
 func _get_player_direction()->Vector2:
 	var direction = Vector2();
 	
-	if(_player_characters.size() > 0):
+	if(_player_characters.size() > 0 && _player_characters[0] != null):
 		direction = (_player_characters[0].global_position - self.global_position).normalized();
 	
 	return direction;

@@ -40,7 +40,7 @@ func _characterDeath(character: Character):
 		characters.remove_at(character_index);
 	
 	if(characters.size() == 0):
-		print('Game Over!');
+		GameManager._gameOver();
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

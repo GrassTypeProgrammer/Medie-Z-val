@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddbwt5e8b883a"]
+
+[ext_resource type="Script" path="res://UI/GameOverGui/game_over_gui.gd" id="1_58iia"]
+
+[node name="GameOverGui" type="CanvasLayer"]
+follow_viewport_enabled = true
+script = ExtResource("1_58iia")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 700
+theme_override_constants/margin_right = 700
+
+[node name="Button" type="Button" parent="Control/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Restart?"

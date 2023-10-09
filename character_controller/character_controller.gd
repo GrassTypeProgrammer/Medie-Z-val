@@ -16,6 +16,14 @@ signal character_died;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_initialise();
+
+
+func _initialise():
+	_zombieSpawner.zombie_died.connect(_zombieDied);
+	GameManager.start_game.connect(_spawnCharacters);
+
+func _spawnCharacters():
 	for i in 1:
 		var character: Character = char_scene.instantiate();
 		character.position = Vector2(i * 100, 200);
@@ -23,8 +31,6 @@ func _ready():
 		character.on_death.connect(_characterDeath);
 		add_child(character);
 		characters.push_back(character);
-	
-	_zombieSpawner.zombie_died.connect(_zombieDied);
 
 
 func _characterDeath(character: Character):

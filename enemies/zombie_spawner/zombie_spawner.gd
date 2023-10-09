@@ -22,6 +22,7 @@ var _increaseSpawnRateTimer: float = _increaseSpawnRateTime;
 var _increaseSpawnRateInterval: float = 0.2;
 var _minSpawnRateTime: float = 0.3;
 
+var gameStarted: bool = false;
 
 signal zombie_died;
 
@@ -29,10 +30,14 @@ signal zombie_died;
 func _ready():
 	_timer = _spawnTime;
 	_characterSpawner.character_died.connect(_characterDied);
-
+	GameManager.start_game.connect(_setGameStarted);
 
 func _process(delta):
-	_timer -= delta;
+	_spawnZombies(delta);
+
+func _spawnZombies(delta: float):
+	if(gameStarted):
+		_timer -= delta;
 	
 	if(_counter < _max_count && _timer <= 0):
 		_timer = _spawnTime;
@@ -41,12 +46,13 @@ func _process(delta):
 		zombie.on_death.connect(_zombieDied); 
 		zombie.needs_new_target.connect(_getNewTarget);
 		_zombies.append(zombie);
-		
 		add_child(zombie);
 		_counter+= 1;
 	
 	_spawnRateIncreaseTimer(delta);
 
+func _setGameStarted():
+	gameStarted = true;
 
 func _spawnRateIncreaseTimer(delta: float):
 	if(_spawnTime > _minSpawnRateTime):

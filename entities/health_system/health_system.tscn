@@ -1,6 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://cd4d56h700r13"]
+[gd_scene load_steps=4 format=3 uid="uid://cd4d56h700r13"]
 
 [ext_resource type="Script" path="res://entities/health_system/health_system.gd" id="1_g3g0c"]
+[ext_resource type="Texture2D" uid="uid://ctuup3msktpdl" path="res://art/basic_shapes/sqaureRed.png" id="2_5mwa6"]
+[ext_resource type="Texture2D" uid="uid://7l81ymfixrjh" path="res://art/basic_shapes/sqaureGreen.png" id="3_fl8ws"]
 
 [node name="HealthSystem" type="Node2D"]
 script = ExtResource("1_g3g0c")
+
+[node name="Background" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -4.0
+offset_right = 41.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5mwa6")
+expand_mode = 1
+
+[node name="Foreground" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 82.0
+grow_vertical = 2
+texture = ExtResource("3_fl8ws")
+expand_mode = 1

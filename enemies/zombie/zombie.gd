@@ -9,6 +9,7 @@ var _separation_distance: int = 70;
 
 @onready var _area: Area2D = $DetectionArea;
 @onready var _navAgent: NavigationAgent2D = $NavigationAgent2D;
+@onready var _sprite: Node = $Sprite2D;
 
 const HealthSystem = preload("res://entities/health_system/health_system.gd");
 @onready var _health_system: HealthSystem = $HealthSystem;
@@ -57,7 +58,7 @@ func _safe_velocity_computed(safe_velocity: Vector2):
 
 
 func _physics_process(delta):
-	self.rotation = Vector2(0, -1).angle_to(_direction);
+	_sprite.rotation = Vector2(0, -1).angle_to(_direction);
 	
 	if(_player_characters.size() > 0 && _player_characters[0] != null &&
 	 self.global_position.distance_to(_player_characters[0].global_position) < 70):

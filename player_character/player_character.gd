@@ -51,8 +51,8 @@ func _process(delta):
 			
 	
 	
-#	if(_zombies.size() > 0 &&_can_fire_arrow):
-#		_spawn_arrow();
+	if(_zombies.size() > 0 &&_can_fire_arrow):
+		_spawn_arrow();
 	
 
 

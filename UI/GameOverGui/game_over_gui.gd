@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @onready var gameOverUI: Node = $Control;
-@onready var restartButton: Button = $Control/VBoxContainer/MarginContainer/VBoxContainer/RestartButton ;
+@onready var restartButton: Button = $Control/VBoxContainer/MarginContainer/VBoxContainer/RestartButton;
 @onready var quitButton: Button = $Control/VBoxContainer/MarginContainer/VBoxContainer/QuitButton;
 
 var enabled: bool = false;

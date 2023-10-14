@@ -28,8 +28,5 @@ func _loadLevel(level:Levels):
 			gameRoot.add_child(currentLevel);
 			GameManager._loadLevel();
 	
-	
-	# TODO:
-	# when you click the 'kill zombies' button on the main menu, call the load level function here.
-	
+
 

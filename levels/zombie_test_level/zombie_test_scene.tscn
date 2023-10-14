@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://pxh6edytb42x"]
+[gd_scene load_steps=6 format=3 uid="uid://pxh6edytb42x"]
 
 [ext_resource type="PackedScene" uid="uid://dpegyn4nqyo3u" path="res://enemies/zombie_spawner/zombie_spawner.tscn" id="2_c46p3"]
 [ext_resource type="PackedScene" uid="uid://bai6sd6bsnbj6" path="res://character_controller/character_controller.tscn" id="2_h7waf"]
 [ext_resource type="PackedScene" uid="uid://ddbwt5e8b883a" path="res://UI/GameOverGui/game_over_gui.tscn" id="3_1lchp"]
+[ext_resource type="PackedScene" uid="uid://ccf6jklbh6w3i" path="res://UI/HUD/hud.tscn" id="4_xpp0w"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_qd7ch"]
 vertices = PackedVector2Array(1921, 0, 1921, 1084, 1, 1082, -13, -15)
@@ -21,3 +22,5 @@ navigation_polygon = SubResource("NavigationPolygon_qd7ch")
 position = Vector2(-93, 282)
 
 [node name="GameOverGui" parent="." instance=ExtResource("3_1lchp")]
+
+[node name="HUD" parent="." instance=ExtResource("4_xpp0w")]

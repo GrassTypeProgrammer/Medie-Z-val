@@ -24,8 +24,10 @@ var _minSpawnRateTime: float = 0.3;
 
 var gameStarted: bool = false;
 
-signal zombie_died;
+var killCount: int = 0;
 
+signal zombie_died;
+signal kill_count_changed;
 
 func _ready():
 	_timer = _spawnTime;
@@ -81,6 +83,8 @@ func _spawnRateIncreaseTimer(delta: float):
 
 func _zombieDied(zombie: Zombie):
 	zombie_died.emit(zombie);
+	killCount += 1;
+	kill_count_changed.emit(killCount);
 	var index = _zombies.find(zombie);
 	
 	if(index != -1):

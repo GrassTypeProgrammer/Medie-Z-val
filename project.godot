@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Medie-Z-val"
-run/main_scene="res://levels/zombie_test_level/zombie_test_scene.tscn"
+run/main_scene="res://game_root/game_root.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameManager="*res://GameManager/game_manager.tscn"
+SceneManager="*res://SceneManager/scene_manager.tscn"
 
 [display]
 

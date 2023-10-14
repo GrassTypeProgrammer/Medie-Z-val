@@ -1,13 +1,12 @@
 extends Control
 
-@onready var scene = preload("res://levels/zombie_test_level/zombie_test_scene.tscn");
+@onready var startButton:Button = $VBoxContainer/StartButton;
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$VBoxContainer/StartButton.pressed.connect(_start_game);
+	startButton.pressed.connect(_start_game);
 	
 
 func _start_game():
-	
-	get_tree().change_scene_to_packed(scene);
+	SceneManager._loadLevel(SceneManager.Levels.Level1);
 
 

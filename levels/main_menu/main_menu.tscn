@@ -9,6 +9,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_o4vc4")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -36,6 +38,3 @@ text = "Kill Zombies
 layout_mode = 2
 text = "Quit
 "
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0

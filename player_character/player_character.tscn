@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdopd0y081d2t"]
+[gd_scene load_steps=7 format=3 uid="uid://cdopd0y081d2t"]
 
 [ext_resource type="Script" path="res://player_character/player_character.gd" id="1_43iwe"]
 [ext_resource type="Texture2D" uid="uid://c82hlii6wnwth" path="res://art/player/player.svg" id="2_ak4bn"]
+[ext_resource type="Texture2D" uid="uid://7l81ymfixrjh" path="res://art/basic_shapes/sqaureGreen.png" id="2_hf51k"]
 [ext_resource type="PackedScene" uid="uid://cd4d56h700r13" path="res://entities/health_system/health_system.tscn" id="3_jdqh8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8m2kh"]
@@ -13,6 +14,11 @@ radius = 286.063
 [node name="player_character" type="CharacterBody2D" groups=["PlayerCharacter"]]
 script = ExtResource("1_43iwe")
 metadata/_edit_vertical_guides_ = [-48.0]
+
+[node name="SelectedSprite" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("2_hf51k")
 
 [node name="icon" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)

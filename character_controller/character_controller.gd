@@ -33,13 +33,16 @@ func _spawnCharacters():
 	_clearCharacters();
 	index = 0;
 	
-	for i in 1:
+	for i in 2:
 		var character: Character = char_scene.instantiate();
 		character.position = Vector2(i * 100, 200);
 		character._index = i;
 		character.on_death.connect(_characterDeath);
 		add_child(character);
 		characters.push_back(character);
+	
+	characters[selected_character]._setSelected(true);
+	
 
 
 func _characterDeath(character: Character):
@@ -64,8 +67,10 @@ func _try_select_character() -> bool:
 	var clickLocation = get_global_mouse_position();
 	
 	for character in characters:
-		if(clickLocation.distance_to(character.position) <= 50):
+		if(clickLocation.distance_to(character.global_position) <= 50):
+			characters[selected_character]._setSelected(false);
 			selected_character = character._index;
+			characters[selected_character]._setSelected(true);
 			just_selected_character = true;
 			return true;
 		

@@ -11,6 +11,9 @@ const arrow_scene = preload("res://Ammo/arrow/arrow.tscn");
 @onready var _area: Area2D = $DetectionArea;
 @onready var _navAgent: NavigationAgent2D = $NavigationAgent2D;
 @onready var _health_system: HealthSystem = $HealthSystem;
+@onready var _selectedSprite: Sprite2D = $SelectedSprite
+
+var isSelected: bool = false;
 
 var destination: Vector2;
 var direction: Vector2;
@@ -103,3 +106,6 @@ func _on_death():
 	on_death.emit(self);
 	self.queue_free();
 
+func _setSelected(selected: bool):
+	isSelected = selected;
+	_selectedSprite.visible = selected;

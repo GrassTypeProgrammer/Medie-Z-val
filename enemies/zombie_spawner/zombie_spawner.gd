@@ -103,3 +103,6 @@ func _onRestart():
 		zombie.queue_free();
 	
 	_zombies.clear();
+
+func _getKillCount() -> int:
+	return killCount;

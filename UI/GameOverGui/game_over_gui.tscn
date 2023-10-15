@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddbwt5e8b883a"]
+[gd_scene load_steps=4 format=3 uid="uid://ddbwt5e8b883a"]
 
 [ext_resource type="Script" path="res://UI/GameOverGui/game_over_gui.gd" id="1_58iia"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ho1eo"]
+
+[sub_resource type="Theme" id="Theme_n16ox"]
+VBoxContainer/styles/test = SubResource("StyleBoxEmpty_ho1eo")
 
 [node name="GameOverGui" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -14,33 +19,57 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="Background" type="ColorRect" parent="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998696, 1)
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_n16ox")
 alignment = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Background/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/margin_left = 700
 theme_override_constants/margin_right = 700
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Background/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="RestartButton" type="Button" parent="Control/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="KillCountLabel" type="Label" parent="Control/Background/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Kill Count: 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="Control/Background/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Restart"
 
-[node name="QuitButton" type="Button" parent="Control/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="Control/Background/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Quit"

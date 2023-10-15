@@ -1,10 +1,18 @@
 extends CanvasLayer
 
 @onready var gameOverUI: Node = $Control;
-@onready var restartButton: Button = $Control/VBoxContainer/MarginContainer/VBoxContainer/RestartButton;
-@onready var quitButton: Button = $Control/VBoxContainer/MarginContainer/VBoxContainer/QuitButton;
+@onready var restartButton: Button =$Control/Background/VBoxContainer/MarginContainer/VBoxContainer/RestartButton
+@onready var quitButton: Button = $Control/Background/VBoxContainer/MarginContainer/VBoxContainer/QuitButton
+
+const ZombieSpawner = preload("res://enemies/zombie_spawner/zombie_spawner.gd");
+@onready var _zombieSpawner:ZombieSpawner = get_parent().get_node("ZombieSpawner");
+
+@onready var killCountLabel: Label =$Control/Background/VBoxContainer/MarginContainer/VBoxContainer/KillCountLabel
 
 var enabled: bool = false;
+
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,6 +21,7 @@ func _ready():
 	GameManager.start_game.connect(_disableGameOverUI);
 	restartButton.button_up.connect(_restartPressed);
 	quitButton.button_up.connect(_quitToMainMenu);
+	
 
 
 func _enableGameOverUI():
@@ -20,6 +29,7 @@ func _enableGameOverUI():
 	enabled = true;
 	gameOverUI.set_process(enabled);
 	gameOverUI.show();
+	killCountLabel.text = 'Kill Count: ' + str(_zombieSpawner._getKillCount());
 
 func _disableGameOverUI():
 	self.remove_child(gameOverUI);

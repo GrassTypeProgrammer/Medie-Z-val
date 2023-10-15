@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpegyn4nqyo3u"]
+[gd_scene load_steps=3 format=3 uid="uid://dpegyn4nqyo3u"]
 
 [ext_resource type="Script" path="res://enemies/zombie_spawner/zombie_spawner.gd" id="1_17ygo"]
+[ext_resource type="PackedScene" uid="uid://ciahtdi8ny8j2" path="res://enemies/zombie_spawner/SpawnPoint/spawn_point.tscn" id="2_a884u"]
 
 [node name="ZombieSpawner" type="Node2D"]
 script = ExtResource("1_17ygo")
+
+[node name="SpawnPoint1" parent="." instance=ExtResource("2_a884u")]
+position = Vector2(103, 125)
+
+[node name="SpawnPoint2" parent="." instance=ExtResource("2_a884u")]
+position = Vector2(250, 124)
+
+[node name="SpawnPoint3" parent="." instance=ExtResource("2_a884u")]
+position = Vector2(391, 129)

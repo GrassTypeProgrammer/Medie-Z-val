@@ -19,8 +19,8 @@ position = Vector2(468, 290)
 navigation_polygon = SubResource("NavigationPolygon_qd7ch")
 
 [node name="ZombieSpawner" parent="." instance=ExtResource("2_c46p3")]
-position = Vector2(-93, 282)
 
 [node name="GameOverGui" parent="." instance=ExtResource("3_1lchp")]
+visible = false
 
 [node name="HUD" parent="." instance=ExtResource("4_xpp0w")]

@@ -4,12 +4,16 @@ extends Node2D
 const Character = preload("res://player_character/player_character.gd");
 const Zombie = preload("res://enemies/zombie/zombie.gd");
 const CharacterSpawner = preload("res://character_controller/character_controller.gd");
+const SpawnPoint = preload("res://enemies/zombie_spawner/SpawnPoint/spawn_point.gd");
 
 #Scenes
 var _zombie_scene = preload("res://enemies/zombie/zombie.tscn");
 
 #onready
 @onready var _characterSpawner:CharacterSpawner = get_parent().get_node("character_controller");
+@onready var spawnPoints: Array[SpawnPoint] = [$SpawnPoint1, $SpawnPoint2, $SpawnPoint3, ];
+
+var spawnPointIndex: int = 0;
 
 var _timer: float;
 var _spawnTime: float = 2;
@@ -42,15 +46,19 @@ func _spawnZombies(delta: float):
 		_timer -= delta;
 	
 	if(_counter < _max_count && _timer <= 0):
-		_timer = _spawnTime;
-		var zombie: Zombie = _zombie_scene.instantiate();
-		zombie.global_position = self.global_position;
-		zombie.on_death.connect(_zombieDied); 
-		zombie.needs_new_target.connect(_getNewTarget);
-		_zombies.append(zombie);
-		add_child(zombie);
-		_counter+= 1;
-	
+		var spawnLocation = _getSpawnLocation();
+		if(spawnLocation != Vector2.ZERO):
+			_timer = _spawnTime;
+			var zombie: Zombie = _zombie_scene.instantiate();
+			zombie.global_position = spawnLocation;
+			zombie.on_death.connect(_zombieDied); 
+			zombie.needs_new_target.connect(_getNewTarget);
+			_zombies.append(zombie);
+			add_child(zombie);
+			_counter+= 1;
+		else:
+			printerr('Not Enough Spawn Point Capacity!');
+		
 	_spawnRateIncreaseTimer(delta);
 
 func _setGameStarted():
@@ -106,3 +114,15 @@ func _onRestart():
 
 func _getKillCount() -> int:
 	return killCount;
+
+func _getSpawnLocation() -> Vector2:
+	for i in spawnPoints.size():
+		if(spawnPoints[spawnPointIndex].isAvailable):
+			spawnPointIndex += 1;
+			spawnPointIndex %= spawnPoints.size();
+			return spawnPoints[spawnPointIndex].global_position;
+		else:
+			spawnPointIndex += 1;
+			spawnPointIndex %= spawnPoints.size();
+	
+	return Vector2.ZERO;

@@ -1,8 +1,6 @@
 extends Control
 
-const ZombieSpawner = preload("res://enemies/zombie_spawner/zombie_spawner.gd");
-@onready var _zombieSpawner:ZombieSpawner = get_parent().get_node("ZombieSpawner");
-
+@onready var _zombieSpawner: Constants.ZombieSpawner = get_parent().get_node("ZombieSpawner");
 @onready var killCountText: RichTextLabel = $HBoxContainer/VBoxContainer/KillCountText;
 
 # Called when the node enters the scene tree for the first time.

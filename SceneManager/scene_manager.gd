@@ -2,8 +2,8 @@ extends Node2D
 
 enum Levels { MainMenu, Level1}
 
-@onready var level1 = preload("res://levels/zombie_test_level/zombie_test_scene.tscn");
-@onready var mainMenu = preload("res://levels/main_menu/main_menu.tscn");
+@onready var Level1 = Constants.Level1;
+@onready var MainMenu = Constants.MainMenu;
 var gameRoot:Node2D;
 var currentLevel;
 
@@ -20,11 +20,11 @@ func _loadLevel(level:Levels):
 	
 	match level:
 		Levels.MainMenu:
-			currentLevel = mainMenu.instantiate();
+			currentLevel = MainMenu.instantiate();
 			currentLevel.size = Vector2(1920, 1080);
 			gameRoot.add_child(currentLevel);
 		Levels.Level1:
-			currentLevel = level1.instantiate();
+			currentLevel = Level1.instantiate();
 			gameRoot.add_child(currentLevel);
 			GameManager._loadLevel();
 	

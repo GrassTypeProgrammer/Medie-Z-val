@@ -4,8 +4,8 @@ extends CanvasLayer
 @onready var restartButton: Button =$Control/Background/VBoxContainer/MarginContainer/VBoxContainer/RestartButton
 @onready var quitButton: Button = $Control/Background/VBoxContainer/MarginContainer/VBoxContainer/QuitButton
 
-const ZombieSpawner = preload("res://enemies/zombie_spawner/zombie_spawner.gd");
-@onready var _zombieSpawner:ZombieSpawner = get_parent().get_node("ZombieSpawner");
+const ZombieSpawner = Constants.ZombieSpawner;
+@onready var _zombieSpawner: ZombieSpawner = get_parent().get_node("ZombieSpawner");
 
 @onready var killCountLabel: Label =$Control/Background/VBoxContainer/MarginContainer/VBoxContainer/KillCountLabel
 

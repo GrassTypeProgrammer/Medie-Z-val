@@ -1,11 +1,10 @@
 extends Node2D
 
 # Types
-const char_scene = preload("res://player_character/player_character.tscn");
-const Character = preload("res://player_character/player_character.gd");
-const Zombie = preload("res://enemies/zombie/zombie.gd");
-const ZombieSpawner = preload("res://enemies/zombie_spawner/zombie_spawner.gd");
-@onready var _zombieSpawner: ZombieSpawner = get_parent().get_node("ZombieSpawner");
+const CharacterScene = Constants.CharacterScene;
+const Character = Constants.Character;
+const Zombie = Constants.Zombie;
+@onready var _zombieSpawner: Constants.ZombieSpawner = get_parent().get_node("ZombieSpawner");
 
 var characters: Array[Character];
 var index = 0;
@@ -34,7 +33,7 @@ func _spawnCharacters():
 	index = 0;
 	
 	for i in 2:
-		var character: Character = char_scene.instantiate();
+		var character: Character = CharacterScene.instantiate();
 		character.position = Vector2(i * 100, 200);
 		character._index = i;
 		character.on_death.connect(_characterDeath);

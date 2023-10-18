@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
 #Types
-const Zombie = preload("res://enemies/zombie/zombie.gd");
-const HealthSystem = preload("res://entities/health_system/health_system.gd");
+const Zombie = Constants.Zombie;
+const HealthSystem = Constants.HealthSystem;
 
 #scenes
-const arrow_scene = preload("res://Ammo/arrow/arrow.tscn");
+const ArrowScene = Constants.ArrowScene;
 
 #onready
 @onready var _area: Area2D = $DetectionArea;
@@ -60,7 +60,7 @@ func _process(delta):
 
 
 func _spawn_arrow():
-	var arrow = arrow_scene.instantiate();
+	var arrow = ArrowScene.instantiate();
 	arrow.global_position = self.global_position + (_zombies[0].global_position - self.global_position).normalized() * 50;
 	arrow._set_direction((_zombies[0].global_position - self.global_position).normalized());
 	get_tree().root.call_deferred('add_child', arrow);

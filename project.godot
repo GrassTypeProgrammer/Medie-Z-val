@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://GameManager/game_manager.tscn"
 SceneManager="*res://SceneManager/scene_manager.tscn"
+Constants="*res://constants/constants.gd"
 
 [display]
 

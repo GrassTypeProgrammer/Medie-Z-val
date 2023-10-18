@@ -1,13 +1,13 @@
 extends Node2D
 
 #Types
-const Character = preload("res://player_character/player_character.gd");
-const Zombie = preload("res://enemies/zombie/zombie.gd");
-const CharacterSpawner = preload("res://character_controller/character_controller.gd");
-const SpawnPoint = preload("res://enemies/zombie_spawner/SpawnPoint/spawn_point.gd");
+const Character = Constants.Character;
+const Zombie = Constants.Zombie;
+const CharacterSpawner = Constants.CharacterSpawner;
+const SpawnPoint = Constants.SpawnPoint;
 
 #Scenes
-var _zombie_scene = preload("res://enemies/zombie/zombie.tscn");
+var ZombieScene = Constants.ZombieScene;
 
 #onready
 @onready var _characterSpawner:CharacterSpawner = get_parent().get_node("character_controller");
@@ -49,7 +49,7 @@ func _spawnZombies(delta: float):
 		var spawnLocation = _getSpawnLocation();
 		if(spawnLocation != Vector2.ZERO):
 			_timer = _spawnTime;
-			var zombie: Zombie = _zombie_scene.instantiate();
+			var zombie: Zombie = ZombieScene.instantiate();
 			zombie.global_position = spawnLocation;
 			zombie.on_death.connect(_zombieDied); 
 			zombie.needs_new_target.connect(_getNewTarget);

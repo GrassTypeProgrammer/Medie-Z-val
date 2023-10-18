@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const Character = preload("res://player_character/player_character.gd");
+const Character = Constants.Character;
 var _seperation_multiplier: float = 1;
 var _speed: int = 150;
 var _separation_distance: int = 70;
@@ -11,7 +11,7 @@ var _separation_distance: int = 70;
 @onready var _navAgent: NavigationAgent2D = $NavigationAgent2D;
 @onready var _sprite: Node = $Sprite2D;
 
-const HealthSystem = preload("res://entities/health_system/health_system.gd");
+const HealthSystem = Constants.HealthSystem;
 @onready var _health_system: HealthSystem = $HealthSystem;
 
 func _get_health_system() -> HealthSystem:

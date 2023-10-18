@@ -3,8 +3,6 @@ extends CharacterBody2D
 const Character = Constants.Character;
 var _seperation_multiplier: float = 1;
 var _speed: int = 150;
-var _separation_distance: int = 70;
-
 
 
 @onready var _area: Area2D = $DetectionArea;
@@ -20,7 +18,6 @@ func _get_health_system() -> HealthSystem:
 var _direction: Vector2;
 var _velocity: Vector2;
 var _neighbours:Array = [];
-var _wall_avoidance: Vector2;
 
 #character that the zombie has detected
 var _player_characters: Array[Character] =[];

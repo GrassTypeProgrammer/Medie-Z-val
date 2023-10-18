@@ -10,7 +10,7 @@ var _health: float = _maxHealth;
 signal on_death;
 
 func _ready():
-	_maxHealthBarSize = foreground.size.x;
+	_maxHealthBarSize = int(foreground.size.x);
 	_healthBarSize = _maxHealthBarSize;
 	global_rotation = 0;
 
@@ -19,7 +19,7 @@ func _take_damage(damage: float):
 	_health -= damage;
 	
 	if(_health < 0):
-		_health == 0;
+		_health = 0;
 	elif(_health > _maxHealth):
 		_health = _maxHealth;
 	
@@ -36,5 +36,5 @@ func _updateHealthBar():
 		background.visible = false;
 		
 	var healthBarPercentage = (_health/_maxHealth);
-	_healthBarSize = _maxHealthBarSize * healthBarPercentage;
+	_healthBarSize = int(_maxHealthBarSize * healthBarPercentage);
 	foreground.size = Vector2(_healthBarSize, foreground.size.y);

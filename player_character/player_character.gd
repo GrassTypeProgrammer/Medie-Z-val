@@ -109,3 +109,6 @@ func _on_death():
 func _setSelected(selected: bool):
 	isSelected = selected;
 	_selectedSprite.visible = selected;
+
+func _getIndex():
+	return _index;

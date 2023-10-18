@@ -90,7 +90,7 @@ func _get_closest_character(origin: Vector2):
 	var closestDistance = -1;
 	
 	for	character in characters:
-		var currentDistance = origin.distance_to(character.position);
+		var currentDistance = origin.distance_to(character.global_position);
 		
 		if(closestDistance == -1 || currentDistance < closestDistance):
 			closestDistance = currentDistance;

@@ -3,14 +3,14 @@ extends Node2D
 #Types
 const Character = Constants.Character;
 const Zombie = Constants.Zombie;
-const CharacterSpawner = Constants.CharacterSpawner;
+const CharacterController = Constants.CharacterController;
 const SpawnPoint = Constants.SpawnPoint;
 
 #Scenes
 var ZombieScene = Constants.ZombieScene;
 
 #onready
-@onready var _characterSpawner:CharacterSpawner = get_parent().get_node("character_controller");
+@onready var _characterSpawner:CharacterController = get_parent().get_node("character_controller");
 @onready var spawnPoints: Array[SpawnPoint] = [$SpawnPoint1, $SpawnPoint2, $SpawnPoint3, ];
 
 var spawnPointIndex: int = 0;

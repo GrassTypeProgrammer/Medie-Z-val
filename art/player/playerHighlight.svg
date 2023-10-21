@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="177.75708mm"
-   height="177.75708mm"
-   viewBox="0 0 177.75708 177.75708"
+   width="448.57495mm"
+   height="448.57492mm"
+   viewBox="0 0 448.57495 448.57492"
    version="1.1"
    id="svg1"
    inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
@@ -27,15 +27,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
-     inkscape:zoom="0.18284757"
-     inkscape:cx="-620.73561"
-     inkscape:cy="560.57621"
+     inkscape:zoom="0.091423787"
+     inkscape:cx="-1219.5951"
+     inkscape:cy="103.91169"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer4" />
+     inkscape:current-layer="layer5" />
   <defs
      id="defs1">
     <linearGradient
@@ -54,7 +54,7 @@
        id="linearGradient5"
        inkscape:collect="always">
       <stop
-         style="stop-color:#3eb445;stop-opacity:0.72490704;"
+         style="stop-color:#3eb445;stop-opacity:1;"
          offset="0"
          id="stop5" />
       <stop
@@ -259,7 +259,7 @@
        fy="92.609016"
        r="224.28746"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(-0.02009719,-0.97989892,0.95534046,-0.01960095,5.2590144,184.46277)" />
+       gradientTransform="matrix(0,-1.1353664,1.058838,-1.0592628e-5,-6.1724376,196.93372)" />
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient6"
@@ -276,7 +276,7 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="background"
-     style="display:none">
+     transform="translate(131.67845,134.57248)">
     <rect
        style="fill:url(#radialGradient8);fill-opacity:1;stroke-width:0.7"
        id="rect4"
@@ -291,13 +291,9 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="PlayerHighlight"
-     transform="translate(-2.8940315,-3.6175397)"
-     inkscape:export-filename="playerHighlight.png"
-     inkscape:export-xdpi="4.529901"
-     inkscape:export-ydpi="4.529901"
-     style="stroke:none;stroke-opacity:0.10434783">
+     transform="translate(128.78442,130.95494)">
     <circle
-       style="fill:url(#radialGradient6);fill-opacity:1;stroke-width:4;stroke-dasharray:none;stroke:none;stroke-opacity:0.10434783"
+       style="fill:url(#radialGradient6);fill-opacity:1;stroke-width:0.7"
        id="path2"
        cx="95.503044"
        cy="93.33252"
@@ -308,8 +304,8 @@
      id="layer3"
      inkscape:label="Player"
      sodipodi:insensitive="true"
-     style="display:none"
-     transform="translate(-15.48748,-42.980773)">
+     style="display:inline"
+     transform="translate(116.19097,91.591703)">
     <g
        inkscape:label="Circle"
        inkscape:groupmode="layer"
@@ -356,7 +352,7 @@
      inkscape:groupmode="layer"
      id="layer3-7"
      inkscape:label="Zombie"
-     transform="translate(-15.305042,-42.824195)"
+     transform="translate(116.37341,91.748281)"
      style="display:none"
      inkscape:export-filename="..\zombies\Zombie.png"
      inkscape:export-xdpi="4.5725322"

@@ -1,16 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://pxh6edytb42x"]
+[gd_scene load_steps=8 format=3 uid="uid://pxh6edytb42x"]
 
+[ext_resource type="Texture2D" uid="uid://df07hkgi8kj01" path="res://art/background/background.png" id="1_j80q0"]
 [ext_resource type="PackedScene" uid="uid://dpegyn4nqyo3u" path="res://enemies/zombie_spawner/zombie_spawner.tscn" id="2_c46p3"]
 [ext_resource type="PackedScene" uid="uid://bai6sd6bsnbj6" path="res://character_controller/character_controller.tscn" id="2_h7waf"]
 [ext_resource type="PackedScene" uid="uid://ddbwt5e8b883a" path="res://UI/GameOverGui/game_over_gui.tscn" id="3_1lchp"]
 [ext_resource type="PackedScene" uid="uid://ccf6jklbh6w3i" path="res://UI/HUD/hud.tscn" id="4_xpp0w"]
+[ext_resource type="Texture2D" uid="uid://o7qyekkj8pit" path="res://art/construction/wall2.png" id="6_jfsgi"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_qd7ch"]
-vertices = PackedVector2Array(1921, 0, 1921, 1084, 1, 1082, -13, -15)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1921, 0, 1921, 1084, 1, 1082, -13, -15)])
+vertices = PackedVector2Array(10, 10, 1902, 10, 1902, 1070, 870, 786, 870, 1070, 582, 786, 582, 794, 862, 794, 862, 1070, 493, 1070, 493, 786, 485, 786, 10, 1070, 485, 1070)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 3), PackedInt32Array(0, 3, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(6, 9, 10, 5), PackedInt32Array(0, 5, 10), PackedInt32Array(0, 10, 11), PackedInt32Array(12, 0, 11, 13)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1902, 10, 1902, 1070, 870, 1070, 870, 786, 582, 786, 582, 794, 862, 794, 862, 1070, 493, 1070, 493, 786, 485, 786, 485, 1070, 10, 1070, 10, 10)])
 
 [node name="ZombieTestScene" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_j80q0")
+centered = false
 
 [node name="character_controller" parent="." instance=ExtResource("2_h7waf")]
 position = Vector2(468, 290)
@@ -24,3 +30,21 @@ navigation_polygon = SubResource("NavigationPolygon_qd7ch")
 visible = false
 
 [node name="HUD" parent="." instance=ExtResource("4_xpp0w")]
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls"]
+position = Vector2(489, 930)
+scale = Vector2(1, 2)
+texture = ExtResource("6_jfsgi")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Walls"]
+position = Vector2(866, 930)
+scale = Vector2(1, 2)
+texture = ExtResource("6_jfsgi")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Walls"]
+position = Vector2(726, 790)
+rotation = 1.5708
+scale = Vector2(1, 2)
+texture = ExtResource("6_jfsgi")

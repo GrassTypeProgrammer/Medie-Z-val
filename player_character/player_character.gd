@@ -42,9 +42,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(moving):
-		_move_to_destination(delta);
-		
+	
 	if(!_can_fire_arrow ):
 		if(_reload_timer > 0):
 			_reload_timer -= delta;
@@ -56,8 +54,11 @@ func _process(delta):
 	
 	if(_zombies.size() > 0 &&_can_fire_arrow):
 		_spawn_arrow();
-	
 
+func _physics_process(_delta):
+	if(moving):
+		_move_to_destination();
+		
 
 func _spawn_arrow():
 	var arrow = ArrowScene.instantiate();
@@ -73,7 +74,7 @@ func _set_destination(new_destination: Vector2):
 	moving = true;
 
 
-func _move_to_destination(_delta):
+func _move_to_destination():
 	velocity =  (_navAgent.get_next_path_position()-global_position).normalized() * speed;
 	move_and_slide();
 	

@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdopd0y081d2t"]
+[gd_scene load_steps=8 format=3 uid="uid://cdopd0y081d2t"]
 
 [ext_resource type="Script" path="res://player_character/player_character.gd" id="1_43iwe"]
 [ext_resource type="Texture2D" uid="uid://7ccfqu7pjbry" path="res://art/player/playerHighlight.png" id="2_w4n73"]
 [ext_resource type="PackedScene" uid="uid://cd4d56h700r13" path="res://entities/health_system/health_system.tscn" id="3_jdqh8"]
 [ext_resource type="Texture2D" uid="uid://bjhtkc6wxbvgo" path="res://art/player/player2.png" id="4_gt8am"]
+[ext_resource type="Texture2D" uid="uid://52ybj6xoc2ms" path="res://art/lighting/light.png" id="5_ps748"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8m2kh"]
 radius = 16.1245
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l4qi4"]
-radius = 286.063
+radius = 215.021
 
 [node name="player_character" type="CharacterBody2D" groups=["PlayerCharacter"]]
 script = ExtResource("1_43iwe")
@@ -35,3 +36,8 @@ position = Vector2(0, -54)
 
 [node name="icon" type="Sprite2D" parent="."]
 texture = ExtResource("4_gt8am")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = ExtResource("5_ps748")
+texture_scale = 2.0

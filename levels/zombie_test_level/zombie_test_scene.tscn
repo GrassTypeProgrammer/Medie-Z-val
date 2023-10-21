@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://pxh6edytb42x"]
+[gd_scene load_steps=10 format=3 uid="uid://pxh6edytb42x"]
 
 [ext_resource type="Texture2D" uid="uid://df07hkgi8kj01" path="res://art/background/background.png" id="1_j80q0"]
 [ext_resource type="PackedScene" uid="uid://dpegyn4nqyo3u" path="res://enemies/zombie_spawner/zombie_spawner.tscn" id="2_c46p3"]
@@ -6,11 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://ddbwt5e8b883a" path="res://UI/GameOverGui/game_over_gui.tscn" id="3_1lchp"]
 [ext_resource type="PackedScene" uid="uid://ccf6jklbh6w3i" path="res://UI/HUD/hud.tscn" id="4_xpp0w"]
 [ext_resource type="Texture2D" uid="uid://o7qyekkj8pit" path="res://art/construction/wall2.png" id="6_jfsgi"]
+[ext_resource type="PackedScene" uid="uid://dq4m8mkk34uek" path="res://lighting/light_manager/light_manager.tscn" id="7_k55cj"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_qd7ch"]
 vertices = PackedVector2Array(10, 10, 1902, 10, 1902, 1070, 870, 786, 870, 1070, 582, 786, 582, 794, 862, 794, 862, 1070, 493, 1070, 493, 786, 485, 786, 10, 1070, 485, 1070)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 3), PackedInt32Array(0, 3, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(6, 9, 10, 5), PackedInt32Array(0, 5, 10), PackedInt32Array(0, 10, 11), PackedInt32Array(12, 0, 11, 13)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1902, 10, 1902, 1070, 870, 1070, 870, 786, 582, 786, 582, 794, 862, 794, 862, 1070, 493, 1070, 493, 786, 485, 786, 485, 1070, 10, 1070, 10, 10)])
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kxm23"]
+polygon = PackedVector2Array(-3.99994, 72, -4, -72, 4, -72, 290, -72, 290, -67, 290, 120.5, -2.99994, 120.5, -1.99994, 116, 280, 116.5, 280, -67.5, 4, -68, 4.00006, 72)
 
 [node name="ZombieTestScene" type="Node2D"]
 
@@ -48,3 +52,8 @@ position = Vector2(726, 790)
 rotation = 1.5708
 scale = Vector2(1, 2)
 texture = ExtResource("6_jfsgi")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Walls/Sprite2D3"]
+occluder = SubResource("OccluderPolygon2D_kxm23")
+
+[node name="LightManager" parent="." instance=ExtResource("7_k55cj")]
